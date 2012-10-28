@@ -27,6 +27,8 @@
 	 			obj.disabled = "";
 	 			obj=document.getElementById("readPKeyButton");
 	 			obj.disabled = "";
+				obj=document.getElementById("verifyButton");
+				obj.disabled = "";
 
 				obj=document.getElementById("initButton");
 				obj.value = "Завершити роботу...";
@@ -71,7 +73,25 @@
 				alert(e);
 				document.getElementById("formSign").ResetOperation();
 			}
-		}  	
+		}
+		
+	 function verifyForm()
+		{
+			try
+			{
+				document.getElementById("formSign").BeginVerify(window.document.all["Signature"].value);
+
+				document.getElementById("formSign").ContinueVerify(window.document.all["FirstRow"].value + "");
+				document.getElementById("formSign").ContinueVerify(window.document.all["SecondRow"].value + "");
+
+				document.getElementById("formSign").EndVerify(true);
+			}
+			catch (e)
+			{
+				alert(e);
+				document.getElementById("formSign").ResetOperation();
+			}
+		} 	
   </script>
     
 
@@ -89,8 +109,7 @@
         <td colspan="2" style="font-weight:bold;"></td>        
       </tr>
       <tr>
-        <td id="inputDataContainer"></td>
-        <td id="sendButtonContainer"></td>
+        <td id="inputDataContainer"></td>        
       </tr>
       <tr>
         <td>
@@ -105,8 +124,13 @@
       <tr>
       	<td>
       		<input type="button" id="signButton" value="Підписати"
-                onClick="signForm()" style="width: 100%" disabled="disabled">	
-      	</td>                   
+                onClick="signForm()" style="width: 200" disabled="disabled">
+            <input type="button" id="verifyButton" value="Перевірити"
+                onClick="verifyForm()" style="width: 200" disabled="disabled">	
+      	</td>                         	      	
+      </tr>
+      <tr>
+   		 <td id="serverContainer"></td>   	      	
       </tr>
     </table>
   </body>
