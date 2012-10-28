@@ -2,8 +2,9 @@ package vac.adm.models;
 
 import java.io.Serializable;
 
-@SuppressWarnings("serial")
 public class Employee implements Serializable {
+	private static final long serialVersionUID = 1L;
+	
 	private int idEmploees;
 	private String name;
 	private String position;

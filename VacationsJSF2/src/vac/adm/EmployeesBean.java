@@ -7,6 +7,8 @@ import javax.faces.context.FacesContext;
 import javax.inject.Named;
 import javax.sql.DataSource;
 
+import DAO.Impl.EmployeeDAOImpl;
+
 import java.io.Serializable;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -42,7 +44,17 @@ public class EmployeesBean implements Serializable{
 	}
 	
 	public List<Employee> getEmployeesList() throws SQLException { 		
-		Connection conn = ds.getConnection();
+		
+		EmployeeDAOImpl emplList = new EmployeeDAOImpl();
+		
+		
+		
+		for (model.Employee empl : emplList.getAllEmployees()) {
+			System.out.println(empl.getName());
+		}
+		
+		
+		Connection conn = ds.getConnection();				
 		try {
 			Statement stmt = conn.createStatement();
 			ResultSet result = stmt.executeQuery(

@@ -1,0 +1,113 @@
+<!doctype html>
+<html>
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <link type="text/css" rel="stylesheet" href="TestSignProject.css">
+
+    <title>Web Application Starter Project</title> 
+    <script type="text/javascript" language="javascript" src="testsignproject/testsignproject.nocache.js"></script>    
+  </head>
+  <applet
+	code="com.iit.certificateAuthority.endUser.libraries.signJava.EndUser.class"
+	archive="EUSignJava.jar"
+	id="formSign"
+	width="640"
+	height="32">
+  </applet>
+  
+  <script language="javascript">
+	 function initializeSign()
+	 {
+	 		obj=document.getElementById("initButton");
+	 		if (obj.value == "Ініціалізувати...")
+	 		{
+	 			document.getElementById("formSign").Initialize();
+	 			document.getElementById("formSign").SetCharset("UTF-16LE");
+	 			obj=document.getElementById("paramsButton");
+	 			obj.disabled = "";
+	 			obj=document.getElementById("readPKeyButton");
+	 			obj.disabled = "";
+
+				obj=document.getElementById("initButton");
+				obj.value = "Завершити роботу...";
+	 		}
+	 }
+	
+	 function setSettings()
+	 {
+	 	document.getElementById("formSign").SetSettings();
+	 }
+	
+	 function readKey()
+	 	{
+	 		try
+	 		{
+	 			document.getElementById("formSign").ResetOperation();
+	 			document.getElementById("formSign").ResetPrivateKey();
+	 			document.getElementById("formSign").ReadPrivateKey();
+	
+	 			obj=document.getElementById("signButton");
+	 			obj.disabled = "";
+	 		}
+	 		catch (e)
+	 		{
+	 			alert(e);
+	
+	 			obj=document.getElementById("signButton");
+	 			obj.disabled = "disabled";
+	 		}
+	 	}	 	
+
+	 function signForm()
+		{
+			try
+			{							
+				document.getElementById("formSign").ContinueSign(window.document.all["FirstRow"].value + "");
+				document.getElementById("formSign").ContinueSign(window.document.all["SecondRow"].value + "");
+				window.document.all["Signature"].value = document.getElementById("formSign").EndSign();
+			}
+			catch (e)
+			{
+				alert(e);
+				document.getElementById("formSign").ResetOperation();
+			}
+		}  	
+  </script>
+    
+
+  <body>
+    <iframe src="javascript:''" id="__gwt_historyFrame" tabIndex='-1' style="position:absolute;width:0;height:0;border:0"></iframe>  
+    <noscript>
+      <div style="width: 22em; position: absolute; left: 50%; margin-left: -11em; color: red; background-color: white; border: 1px solid red; padding: 4px; font-family: sans-serif">
+        Your web browser must have JavaScript enabled
+        in order for this application to display correctly.
+      </div>
+    </noscript>
+
+    <table align="center">
+      <tr>
+        <td colspan="2" style="font-weight:bold;"></td>        
+      </tr>
+      <tr>
+        <td id="inputDataContainer"></td>
+        <td id="sendButtonContainer"></td>
+      </tr>
+      <tr>
+        <td>
+        	<input type="button" id="initButton" value="Ініціалізувати..."
+          		onClick="initializeSign()" style="width: 175">        
+        	<input type="button" id="paramsButton" value="Параметри..."
+            	onClick="setSettings()" disabled="disabled" style="width: 175">                
+            <input type="button" id="readPKeyButton" value="Зчитати ключ..."
+                onClick="readKey()" disabled="disabled" style="width: 175">
+         </td>
+      </tr>
+      <tr>
+      	<td>
+      		<input type="button" id="signButton" value="Підписати"
+                onClick="signForm()" style="width: 100%" disabled="disabled">	
+      	</td>                   
+      </tr>
+    </table>
+  </body>
+</html>
