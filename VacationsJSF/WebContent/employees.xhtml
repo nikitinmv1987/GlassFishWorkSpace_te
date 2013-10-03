@@ -2,18 +2,42 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:ui="http://java.sun.com/jsf/facelets">
+	  xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html">
    <head>
      <title>IGNORED</title>
-     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />   	 
+     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />  
    </head>
    <body>
       <ui:composition template="/templates/masterLayout.xhtml">     
          <ui:define name="windowTitle">
          	Співробітники            
          </ui:define>          	
-         <ui:define name="content">
-         	Співробітники
+         <ui:define name="content">         
+         	<h:form>
+         		<h:dataTable class="table" value="#{employees.employees}" var="employee">
+            		<h:column>
+            		 	<f:facet name="header">Співробітник</f:facet>
+               			#{employee.name}
+            		</h:column>
+
+            		<h:column>
+            			<f:facet name="header">Посада</f:facet>
+               			#{employee.position}
+            		</h:column>
+            		
+            		<h:column>
+            			<f:facet name="header">Табельний номер</f:facet>
+               			#{employee.tabNumber}
+            		</h:column>
+            		
+            		<h:column>
+            			<f:facet name="header">Телефон</f:facet>
+               			#{employee.phone}
+            		</h:column>
+         		</h:dataTable>
+      	 </h:form>
          </ui:define>         
       </ui:composition>
    </body>
