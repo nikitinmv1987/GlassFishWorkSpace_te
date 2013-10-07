@@ -1,0 +1,2 @@
+serviceClass: com.example.muproject.client.GreetingService
+path: 8BCBD46701E2984F3078B654CFB5FACC.gwt.rpc
