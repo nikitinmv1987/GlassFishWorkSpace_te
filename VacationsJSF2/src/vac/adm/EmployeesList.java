@@ -23,8 +23,8 @@ public class EmployeesList {
 		try {
 			Statement stmt = conn.createStatement();
 			ResultSet result = stmt.executeQuery(
-					"Use Vacations "
-					+ "SELECT " +
+					"Use Vacations " +
+					"SELECT " +
 						"E.IdEmploees, " +
 						"E.Name, " +
 						"E.Position, " +

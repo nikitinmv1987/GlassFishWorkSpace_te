@@ -4,61 +4,61 @@ import java.io.Serializable;
 
 @SuppressWarnings("serial")
 public class Employee implements Serializable {
-	private int Id;
-	private String Name;
-	private String Position;
-	private String PhoneNumber;
-	private String TabNumber;
-	private String Login;
-	private Boolean Admin;
+	private int idEmploees;
+	private String name;
+	private String position;
+	private String telephone;
+	private String tabNumber;
+	private String login;
+	private Boolean admin;
 	
 	public int getId() {
-		return Id;
+		return idEmploees;
 	}
-	public void setId(int id) {
-		Id = id;
+	public void setId(int idEmploees) {
+		this.idEmploees = idEmploees;
 	}
 	
 	public String getName() {
-		return Name;
+		return name;
 	}
 	public void setName(String name) {
-		Name = name;
+		this.name = name;
 	}
 	
 	public String getPhoneNumber() {
-		return PhoneNumber;
+		return telephone;
 	}
-	public void setPhoneNumber(String phoneNumber) {
-		PhoneNumber = phoneNumber;
+	public void setPhoneNumber(String telephone) {
+		this.telephone = telephone;
 	}
 	
 	public String getTabNumber() {
-		return TabNumber;
+		return tabNumber;
 	}
 	public void setTabNumber(String tabNumber) {
-		TabNumber = tabNumber;
+		this.tabNumber = tabNumber;
 	}
 	
 	public Boolean getAdmin() {
-		return Admin;
+		return admin;
 	}
 	public void setAdmin(Boolean admin) {
-		Admin = admin;
+		this.admin = admin;
 	}
 	
 	public String getLogin() {
-		return Login;
+		return login;
 	}
 	public void setLogin(String login) {
-		Login = login;
+		this.login = login;
 	}
 	
 	public String getPosition() {
-		return Position;
+		return position;
 	}
 	public void setPosition(String position) {
-		Position = position;
+		this.position = position;
 	} 
 }
 
