@@ -16,7 +16,7 @@
          </ui:define>          	
          <ui:define name="content">         
          	<h:form>
-         		<h:dataTable class="table" value="#{employeesList.employeesList}" var="employee">
+         		<h:dataTable class="table table-bordered table-hover table-striped" value="#{employeesList.employeesList}" var="employee">
             		<h:column>
             		 	<f:facet name="header">Співробітник</f:facet>
                			#{employee.name}

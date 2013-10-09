@@ -4,19 +4,22 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:corejsf="http://corejsf.com/facelets"
 	xmlns:f="http://java.sun.com/jsf/core">
 <head>
 	<title>IGNORED</title>
-	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />	
 </head>
 <body>
 
 <f:view><ui:composition>
-	<h:form>			
-		<h:commandButton class="btn-large" value="Співробітники" action="employees?faces-redirect=true"></h:commandButton><br></br>
-		<h:commandButton class="btn-large" value="Відгули" action="vacations?faces-redirect=true"></h:commandButton><br></br>
-		<h:commandButton class="btn-large" value="Начислення" action="accruals?faces-redirect=true"></h:commandButton><br></br>
+	<h:form>		
+		<div class="tabbable tabs-left">
+			<ul class="nav nav-tabs nav-stacked">
+	  			<li class ="thinBorder"><a href="employees.xhtml">Співробітники</a></li>
+				<li class ="thinBorder"><a href="vacations.xhtml">Відгули</a></li>
+				<li class ="thinBorder"><a href="accruals.xhtml" >Начислення</a></li>
+			</ul>
+		</div>		
 	</h:form>
 </ui:composition></f:view></body>
 </html>
