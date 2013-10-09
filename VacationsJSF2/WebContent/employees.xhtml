@@ -14,7 +14,22 @@
          <ui:define name="windowTitle">
          	Співробітники            
          </ui:define>          	
-         <ui:define name="content">         
+         <ui:define name="content">
+         	
+        <div class="btn-toolbar">
+        <div class="btn-group">
+          <button type="button" class="btn btn-default" title="Додати">
+          	<span class="glyphicon glyphicon-plus"></span>
+          </button>
+          <button type="button" class="btn btn-default disabled" title="Редагувати">
+          	<span class="glyphicon glyphicon-pencil"></span>
+          </button>
+          <button type="button" class="btn btn-default disabled" title="Вилучити">
+          	<span class="glyphicon glyphicon-remove"></span>
+          </button>
+        </div>
+        </div>
+                  
          	<h:form>
          		<h:dataTable class="table table-bordered table-hover table-striped" value="#{employeesList.employeesList}" var="employee">
             		<h:column>
