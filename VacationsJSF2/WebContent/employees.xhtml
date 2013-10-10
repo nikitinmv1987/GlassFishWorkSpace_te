@@ -31,7 +31,15 @@
         </div>
                   
          	<h:form>
-         		<h:dataTable class="table table-bordered table-hover table-striped" value="#{employeesList.employeesList}" var="employee">
+         		<h:dataTable class="table table-bordered table-hover" 
+         			value="#{employeesList.employeesList}" var="employee"
+         			binding="#{employeesList.dataTableEmployees}">
+            		
+            		<h:column>
+            			<f:facet name="header">ИД</f:facet>
+            			<h:commandLink value="#{employee.idEmploees}" action="#{employeesList.editEmployee}" />
+        			</h:column>
+            		
             		<h:column>
             		 	<f:facet name="header">Співробітник</f:facet>
                			#{employee.name}

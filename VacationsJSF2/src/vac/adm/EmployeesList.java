@@ -2,13 +2,18 @@ package vac.adm;
 
 import javax.annotation.Resource;
 import javax.enterprise.context.RequestScoped;
+import javax.faces.component.html.HtmlDataTable;
 import javax.sql.DataSource;
-import javax.sql.rowset.CachedRowSet;
+
+
+
 
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.inject.Named; 
 
@@ -17,8 +22,12 @@ import javax.inject.Named;
 public class EmployeesList {
 	@Resource(name="vacRes")
 	private DataSource ds;
+	private List<Employee> dataList;
 	
-	public ResultSet getEmployeesList() throws SQLException { 		
+	private HtmlDataTable dataTableEmployees;
+	private Employee dataItem = new Employee();
+	
+	public List<Employee> getEmployeesList() throws SQLException { 		
 		Connection conn = ds.getConnection();
 		try {
 			Statement stmt = conn.createStatement();
@@ -34,14 +43,43 @@ public class EmployeesList {
 						"E.Admin " +
 					"FROM dbo.Employees E ORDER BY E.Name");
 			
-			CachedRowSet crs = new com.sun.rowset.CachedRowSetImpl();
-			crs.populate(result);
-			return crs;
+			dataList = new ArrayList<Employee>();			
+			while (result.next()) {
+				dataList.add(new Employee(
+						result.getInt("IdEmploees"),
+						result.getString("Name"),
+						result.getString("Position"),
+						result.getString("TabNumber"),
+						result.getString("Telephone"),
+						result.getString("Login"),
+						result.getBoolean("Admin")						
+						));
+			}
+						
+			return dataList;
 		} 
 		
 		finally
 		{
 			conn.close();
 		}				 						
-	}	
+	}
+
+	public String editEmployee() {
+		//int index = dataTableEmployees.getRowIndex();
+		//System.out.println(index);
+		
+		dataItem = (Employee) dataTableEmployees.getRowData();					
+		System.out.println(dataItem.getIdEmploees());
+		
+		return "edit";
+	}
+
+	public HtmlDataTable getDataTableEmployees() {
+		return dataTableEmployees;
+	}
+
+	public void setDataTableEmployees(HtmlDataTable dataTableEmployees) {
+		this.dataTableEmployees = dataTableEmployees;
+	}
 }

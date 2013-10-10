@@ -12,10 +12,24 @@ public class Employee implements Serializable {
 	private String login;
 	private Boolean admin;
 	
-	public int getId() {
+	public Employee(int idEmploees, String name, String position, String telephone, 
+			String tabNumber, String login, Boolean admin) {
+		this.idEmploees = idEmploees;
+		this.name = name;
+		this.position = position;
+		this.telephone = telephone;
+		this.tabNumber = tabNumber;
+		this.login = login;
+		this.admin = admin;
+	}
+	
+	public Employee() {
+	}
+
+	public int getIdEmploees() {
 		return idEmploees;
 	}
-	public void setId(int idEmploees) {
+	public void setIdEmploees(int idEmploees) {
 		this.idEmploees = idEmploees;
 	}
 	
@@ -26,10 +40,10 @@ public class Employee implements Serializable {
 		this.name = name;
 	}
 	
-	public String getPhoneNumber() {
+	public String getTelephone() {
 		return telephone;
 	}
-	public void setPhoneNumber(String telephone) {
+	public void setTelephone(String telephone) {
 		this.telephone = telephone;
 	}
 	
