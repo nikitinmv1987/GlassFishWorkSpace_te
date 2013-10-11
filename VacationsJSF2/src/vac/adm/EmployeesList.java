@@ -3,7 +3,9 @@ package vac.adm;
 import javax.annotation.Resource;
 import javax.enterprise.context.RequestScoped;
 import javax.faces.component.html.HtmlDataTable;
+import javax.faces.context.FacesContext;
 import javax.sql.DataSource;
+
 
 
 
@@ -71,6 +73,17 @@ public class EmployeesList {
 		
 		dataItem = (Employee) dataTableEmployees.getRowData();					
 		System.out.println(dataItem.getIdEmploees());
+		
+		
+		String rowIndex = FacesContext.getCurrentInstance().getExternalContext()
+	            .getRequestParameterMap().get("rowIndex");
+	        if (rowIndex != null && rowIndex.trim().length() != 0) {
+	            dataItem = dataList.get(Integer.parseInt(rowIndex));
+	            System.out.println(rowIndex);
+	        } else {
+	            // Handle unexpected state, e.g. show message "Please select row" or so.
+	        }
+		
 		
 		return "edit";
 	}

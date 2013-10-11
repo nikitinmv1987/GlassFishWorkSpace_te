@@ -7,7 +7,7 @@
       xmlns:h="http://java.sun.com/jsf/html">
    <head>
      <title>IGNORED</title>
-     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />  
+     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
    </head>
    <body>
       <ui:composition template="/templates/masterLayout.xhtml">     
@@ -18,26 +18,35 @@
          	
         <div class="btn-toolbar">
         <div class="btn-group">
-          <button type="button" class="btn btn-default" title="Додати">
-          	<span class="glyphicon glyphicon-plus"></span>
-          </button>
-          <button type="button" class="btn btn-default disabled" title="Редагувати">
-          	<span class="glyphicon glyphicon-pencil"></span>
-          </button>
-          <button type="button" class="btn btn-default disabled" title="Вилучити">
-          	<span class="glyphicon glyphicon-remove"></span>
-          </button>
+          <h:form>
+          	<h:commandButton  type="button" class="btn btn-default" title="Додати" >
+	          	<span class="glyphicon glyphicon-plus"></span>
+          	</h:commandButton >
+    	  	<h:commandButton  type="button" class="btn btn-default" title="Редагувати" action="#{employeesList.editEmployee}">
+        	  	<span class="glyphicon glyphicon-pencil"></span>
+          	</h:commandButton >
+          	<h:commandButton  type="button" class="btn btn-default disabled" title="Вилучити">
+          		<span class="glyphicon glyphicon-remove"></span>
+          	</h:commandButton>
+          </h:form>
         </div>
-        </div>
-                  
-         	<h:form>
-         		<h:dataTable class="table table-bordered table-hover" 
+        </div>        
+        	<h:form id="form">
+        	
+        		<input id="rowIndex" type="hidden" name="rowIndex"/>
+        		 
+         		<h:dataTable id="dataTable" 
+         			class="table table-bordered table-hover" 
          			value="#{employeesList.employeesList}" var="employee"
          			binding="#{employeesList.dataTableEmployees}">
-            		
+         			           		
+					<h:column>
+					<h:commandButton value="Ред" type="button" class="btn btn-default" title="Редагувати" action="#{employeesList.editEmployee}"/>          			
+					</h:column>         			           		
+         			           		
             		<h:column>
             			<f:facet name="header">ИД</f:facet>
-            			<h:commandLink value="#{employee.idEmploees}" action="#{employeesList.editEmployee}" />
+            			#{employee.idEmploees}
         			</h:column>
             		
             		<h:column>
@@ -59,9 +68,16 @@
             			<f:facet name="header">Телефон</f:facet>
                			#{employee.telephone}
             		</h:column>
+         			      	             	 	            	 	
          		</h:dataTable>
-      	 </h:form>
+         	</h:form>
+      	    <script>
+                addOnclickToDatatableRows();
+       </script>
+      	 
          </ui:define>         
       </ui:composition>
+      
+    
    </body>
 </html>
