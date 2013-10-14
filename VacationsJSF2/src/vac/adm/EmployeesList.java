@@ -63,8 +63,7 @@ public class EmployeesList {
 		}				 						
 	}
 
-	public void editEmployee() {
-		
+	public void editEmployee() {		
 		String rowIndex = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().get("rowIndex");			    		 
 		
 		if (rowIndex != null && rowIndex.trim().length() != 0) {
