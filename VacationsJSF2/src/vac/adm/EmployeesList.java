@@ -89,7 +89,7 @@ public class EmployeesList {
 	    }
 		
 		dataItemId.setValue(dataItem.getIdEmploees());
-		return "editEmployee";
+		return "editEmployee?faces-redirec=true";
 	}
 
 	public HtmlDataTable getDataTableEmployees() {

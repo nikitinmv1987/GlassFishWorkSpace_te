@@ -16,28 +16,44 @@
          </ui:define>          	
          <ui:define name="content">
          
-         <h:form>
- 			<h:panelGrid columns="2" class="input-group">
- 			
-        		<h:outputText value="ПІБ" />
-        		<h:inputText value="#{employeesList.dataItem.name}" />
+         <h:form class="bs-example-form">
+         	
+         	<div class="highlight">
+         	<h4>Редагування співробітника</h4> 			
 
-        		<h:outputText value="Посада" />
-        		<h:inputText value="#{employeesList.dataItem.position}" />
-        		
-        		<h:outputText value="Табельний номер" />
-        		<h:inputText value="#{employeesList.dataItem.tabNumber}" />
-        		
-        		<h:outputText value="Телефон" />
-        		<h:inputText value="#{employeesList.dataItem.telephone}" />
-    		</h:panelGrid>
+			<div class="input-group">			
+  				<span class="input-group-addon input-text" style="width: 150px; text-align: left;">ПІБ</span>
+  				<h:inputText type="text" class="form-control" style="width: 300px;" placeholder="ПІБ" value="#{employeesList.dataItem.name}"/>
+			</div>
+				<br></br>
+			
+			<div class="input-group">
+  				<span class="input-group-addon" style="width: 150px; text-align: left;">Посада</span>
+  				<h:inputText type="text" class="form-control" style="width: 300px;" placeholder="Посада" value="#{employeesList.dataItem.position}"/>
+			</div>
+				<br></br>
+			<div class="input-group">
+  				<span class="input-group-addon" style="width: 150px; text-align: left;">Табельний номер</span>
+  				<h:inputText type="text" class="form-control" style="width: 300px;" placeholder="Табельний номер" value="#{employeesList.dataItem.tabNumber}"/>
+			</div>	
+				<br></br>
+			<div class="input-group">
+  				<span class="input-group-addon" style="width: 150px; text-align: left;">Телефон</span>
+  				<h:inputText type="text" class="form-control" style="width: 300px;" placeholder="Табельний номер" value="#{employeesList.dataItem.telephone}"/>
+			</div>	       	   		
 
     		<h:inputHidden binding="#{employeesList.dataItemId}" />
     		
-    		<h:commandLink class="btn btn-default" value="Зберегти" action="#{employeesList.saveDataItem}">
+    		<br></br>    		
+    		
+    		<h:commandLink class="btn btn-default" style="width: 160px;" value="Зберегти" action="#{employeesList.saveDataItem}">
     			<span class="glyphicon glyphicon-save"/>
     		</h:commandLink> 
-    		
+
+    		<h:commandLink class="btn btn-default" style="margin-left: 20px; width: 160px;" value="Повернутися" action="employees?faces-redirec=true">
+    			<span class="glyphicon glyphicon-repeat"/>
+    		</h:commandLink>
+    		</div>
        	 </h:form>
           	 
          </ui:define>         
