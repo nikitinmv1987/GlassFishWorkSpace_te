@@ -17,12 +17,12 @@
          <ui:define name="content">
          
          <h:form>
- 			<h:panelGrid columns="2">
+ 			<h:panelGrid columns="2" class="input-group">
  			
         		<h:outputText value="ПІБ" />
         		<h:inputText value="#{employeesList.dataItem.name}" />
 
-        		<h:outputText value="Value" />
+        		<h:outputText value="Посада" />
         		<h:inputText value="#{employeesList.dataItem.position}" />
         		
         		<h:outputText value="Табельний номер" />
@@ -33,7 +33,11 @@
     		</h:panelGrid>
 
     		<h:inputHidden binding="#{employeesList.dataItemId}" />
-    		<h:commandButton value="Зберегти" action="#{employeesList.saveDataItem}" />
+    		
+    		<h:commandLink class="btn btn-default" value="Зберегти" action="#{employeesList.saveDataItem}">
+    			<span class="glyphicon glyphicon-save"/>
+    		</h:commandLink> 
+    		
        	 </h:form>
           	 
          </ui:define>         
