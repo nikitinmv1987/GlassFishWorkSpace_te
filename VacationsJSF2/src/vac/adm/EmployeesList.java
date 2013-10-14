@@ -5,11 +5,6 @@ import javax.enterprise.context.RequestScoped;
 import javax.faces.component.html.HtmlDataTable;
 import javax.faces.context.FacesContext;
 import javax.sql.DataSource;
-
-
-
-
-
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -24,10 +19,11 @@ import javax.inject.Named;
 public class EmployeesList {
 	@Resource(name="vacRes")
 	private DataSource ds;
-	private List<Employee> dataList;
-	
+	private List<Employee> dataList;	
 	private HtmlDataTable dataTableEmployees;
 	private Employee dataItem = new Employee();
+	private int rowIndex;
+	
 	
 	public List<Employee> getEmployeesList() throws SQLException { 		
 		Connection conn = ds.getConnection();
@@ -67,25 +63,20 @@ public class EmployeesList {
 		}				 						
 	}
 
-	public String editEmployee() {
-		//int index = dataTableEmployees.getRowIndex();
-		//System.out.println(index);
+	public void editEmployee() {
 		
-		dataItem = (Employee) dataTableEmployees.getRowData();					
-		System.out.println(dataItem.getIdEmploees());
+		String rowIndex = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().get("rowIndex");			    		 
 		
-		
-		String rowIndex = FacesContext.getCurrentInstance().getExternalContext()
-	            .getRequestParameterMap().get("rowIndex");
-	        if (rowIndex != null && rowIndex.trim().length() != 0) {
-	            dataItem = dataList.get(Integer.parseInt(rowIndex));
-	            System.out.println(rowIndex);
-	        } else {
-	            // Handle unexpected state, e.g. show message "Please select row" or so.
-	        }
-		
-		
-		return "edit";
+		if (rowIndex != null && rowIndex.trim().length() != 0) {
+			setRowIndex(Integer.parseInt(rowIndex)); 
+			dataItem = dataList.get(this.rowIndex - 1);			
+	        System.out.println(rowIndex);
+	        System.out.println(dataItem.getName());
+	    } else {
+	    	System.out.println("Не выбрана строка");
+	    }
+				
+		//return "editEmployee";
 	}
 
 	public HtmlDataTable getDataTableEmployees() {
@@ -94,5 +85,13 @@ public class EmployeesList {
 
 	public void setDataTableEmployees(HtmlDataTable dataTableEmployees) {
 		this.dataTableEmployees = dataTableEmployees;
+	}
+
+	public int getRowIndex() {
+		return rowIndex;
+	}
+
+	public void setRowIndex(int rowIndex) {
+		this.rowIndex = rowIndex;
 	}
 }

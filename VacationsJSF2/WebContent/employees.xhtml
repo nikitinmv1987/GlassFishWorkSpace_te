@@ -15,40 +15,27 @@
          	Співробітники            
          </ui:define>          	
          <ui:define name="content">
-         	
-        <div class="btn-toolbar">
-        <div class="btn-group">
-          <h:form>
-          	<h:commandButton  type="button" class="btn btn-default" title="Додати" >
-	          	<span class="glyphicon glyphicon-plus"></span>
-          	</h:commandButton >
-    	  	<h:commandButton  type="button" class="btn btn-default" title="Редагувати" action="#{employeesList.editEmployee}">
-        	  	<span class="glyphicon glyphicon-pencil"></span>
-          	</h:commandButton >
-          	<h:commandButton  type="button" class="btn btn-default disabled" title="Вилучити">
-          		<span class="glyphicon glyphicon-remove"></span>
-          	</h:commandButton>
-          </h:form>
-        </div>
-        </div>        
-        	<h:form id="form">
-        	
-        		<input id="rowIndex" type="hidden" name="rowIndex"/>
-        		 
+         
+         <h:form id="form">	
+         	<div class="btn-toolbar">
+        	<div class="btn-group">         
+          		<h:commandLink class="btn btn-default" title="Додати" >
+	          		<span class="glyphicon glyphicon-plus"></span>
+          		</h:commandLink >
+    	  		<h:commandLink class="btn btn-default" title="Редагувати" action="#{employeesList.editEmployee}">
+        	  		<span class="glyphicon glyphicon-pencil"></span>
+          		</h:commandLink >
+          		<h:commandLink class="btn btn-default" title="Вилучити">
+          			<span class="glyphicon glyphicon-remove"></span>
+          		</h:commandLink>
+        	</div>
+        	</div>        
+        		        		 
          		<h:dataTable id="dataTable" 
          			class="table table-bordered table-hover" 
          			value="#{employeesList.employeesList}" var="employee"
-         			binding="#{employeesList.dataTableEmployees}">
-         			           		
-					<h:column>
-					<h:commandButton value="Ред" type="button" class="btn btn-default" title="Редагувати" action="#{employeesList.editEmployee}"/>          			
-					</h:column>         			           		
-         			           		
-            		<h:column>
-            			<f:facet name="header">ИД</f:facet>
-            			#{employee.idEmploees}
-        			</h:column>
-            		
+         			binding="#{employeesList.dataTableEmployees}">         			         	
+		           		           		
             		<h:column>
             		 	<f:facet name="header">Співробітник</f:facet>
                			#{employee.name}
@@ -69,7 +56,10 @@
                			#{employee.telephone}
             		</h:column>
          			      	             	 	            	 	
-         		</h:dataTable>
+         		</h:dataTable>				
+				
+				<input id="rowIndex" type="hidden" name="rowIndex"/>
+				
          	</h:form>
       	    <script>
                 addOnclickToDatatableRows();
