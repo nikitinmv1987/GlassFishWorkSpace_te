@@ -3,8 +3,10 @@ package vac.adm;
 import javax.annotation.Resource;
 import javax.enterprise.context.RequestScoped;
 import javax.faces.component.html.HtmlDataTable;
+import javax.faces.component.html.HtmlInputHidden;
 import javax.faces.context.FacesContext;
 import javax.sql.DataSource;
+
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -19,9 +21,20 @@ import javax.inject.Named;
 public class EmployeesList {
 	@Resource(name="vacRes")
 	private DataSource ds;
+	
+	public Employee getDataItem() {
+		return dataItem;
+	}
+
+	public void setDataItem(Employee dataItem) {
+		this.dataItem = dataItem;
+	}
+
 	private List<Employee> dataList;	
 	private HtmlDataTable dataTableEmployees;
 	private Employee dataItem = new Employee();
+	private HtmlInputHidden dataItemId = new HtmlInputHidden();
+	
 	private int rowIndex;
 	
 	
@@ -63,7 +76,7 @@ public class EmployeesList {
 		}				 						
 	}
 
-	public void editEmployee() {		
+	public String editEmployee() {		
 		String rowIndex = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().get("rowIndex");			    		 
 		
 		if (rowIndex != null && rowIndex.trim().length() != 0) {
@@ -74,8 +87,9 @@ public class EmployeesList {
 	    } else {
 	    	System.out.println("Не выбрана строка");
 	    }
-				
-		//return "editEmployee";
+		
+		dataItemId.setValue(dataItem.getIdEmploees());
+		return "editEmployee";
 	}
 
 	public HtmlDataTable getDataTableEmployees() {
@@ -93,4 +107,28 @@ public class EmployeesList {
 	public void setRowIndex(int rowIndex) {
 		this.rowIndex = rowIndex;
 	}
+
+	public HtmlInputHidden getDataItemId() {
+		return dataItemId;
+	}
+
+	public void setDataItemId(HtmlInputHidden dataItemId) {
+		this.dataItemId = dataItemId;
+	}
+	
+	public String saveDataItem() {
+
+        // Retain the ID of the data item from hidden input element.
+        dataItem.setIdEmploees((int) dataItemId.getValue());
+
+        // Do your "UPDATE mydata SET values WHERE id" thing.
+        //try {
+            //dataDAO.save(dataItem);
+        //} catch (DAOException e) {
+        //    setErrorMessage(e.getMessage() + " Cause: " + e.getCause());
+        //    e.printStackTrace();
+        //}
+
+        return "employees"; // Navigation case.
+    }
 }
