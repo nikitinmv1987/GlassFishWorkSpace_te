@@ -47,3 +47,11 @@
   border: 1px solid #e1e1e8;
   border-radius: 4px;
 }
+
+<input id="customId" />
+
+input#checkBoxId{
+   background: #888 !important;
+   border: none !important;
+   color: #000 !important;
+}

@@ -122,14 +122,16 @@ public class EmployeesList {
 					     "Position = ?, " +
 					     "TabNumber = ?, " +
 					     "Telephone = ?, " +
-					     "Login = ? " +
+					     "Login = ?, " +
+					     "Admin = ? " +
 					"WHERE IdEmploees = ?");
 			updateEmployee.setString(1, dataItem.getName());
 			updateEmployee.setString(2, dataItem.getPosition());
 			updateEmployee.setString(3, dataItem.getTabNumber());
 			updateEmployee.setString(4, dataItem.getTelephone());
 			updateEmployee.setString(5, dataItem.getLogin());
-			updateEmployee.setInt(6, dataItem.getIdEmploees());
+			updateEmployee.setBoolean(6, dataItem.getAdmin());
+			updateEmployee.setInt(7, dataItem.getIdEmploees());
 			
 			updateEmployee.execute();
 			

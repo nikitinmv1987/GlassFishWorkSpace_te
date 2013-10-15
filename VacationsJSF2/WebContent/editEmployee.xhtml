@@ -22,7 +22,7 @@
          	<h4>Редагування співробітника</h4> 			
 
 			<div class="input-group">			
-  				<span class="input-group-addon input-text" style="width: 150px; text-align: left;">ПІБ</span>
+  				<span class="input-group-addon" style="width: 150px; text-align: left;">ПІБ</span>
   				<h:inputText type="text" class="form-control" style="width: 300px;" placeholder="ПІБ" value="#{employeesList.dataItem.name}"/>
 			</div>
 				<br></br>
@@ -40,7 +40,19 @@
 			<div class="input-group">
   				<span class="input-group-addon" style="width: 150px; text-align: left;">Телефон</span>
   				<h:inputText type="text" class="form-control" style="width: 300px;" placeholder="Табельний номер" value="#{employeesList.dataItem.telephone}"/>
+			</div>
+				<br></br>
+			<div class="input-group">
+  				<span class="input-group-addon" style="width: 150px; text-align: left;">Користувач AD</span>
+  				<h:inputText type="text" class="form-control" style="width: 300px;" placeholder="Користувач AD" value="#{employeesList.dataItem.login}"/>
 			</div>	       	   		
+				<br></br>
+			<div class="input-group">  				
+  				<h:selectBooleanCheckbox value="#{employeesList.dataItem.admin}">
+  					Адміністратор системи управління відгулами
+  				</h:selectBooleanCheckbox>
+  				
+			</div>
 
     		<h:inputHidden binding="#{employeesList.dataItemId}" />
     		
