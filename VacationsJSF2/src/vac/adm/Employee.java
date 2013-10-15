@@ -20,7 +20,7 @@ public class Employee implements Serializable {
 		this.telephone = telephone;
 		this.tabNumber = tabNumber;
 		this.login = login;
-		this.admin = admin;
+		this.admin = admin == true;				
 	}
 	
 	public Employee() {

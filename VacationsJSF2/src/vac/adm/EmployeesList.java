@@ -8,6 +8,7 @@ import javax.faces.context.FacesContext;
 import javax.sql.DataSource;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -21,15 +22,6 @@ import javax.inject.Named;
 public class EmployeesList {
 	@Resource(name="vacRes")
 	private DataSource ds;
-	
-	public Employee getDataItem() {
-		return dataItem;
-	}
-
-	public void setDataItem(Employee dataItem) {
-		this.dataItem = dataItem;
-	}
-
 	private List<Employee> dataList;	
 	private HtmlDataTable dataTableEmployees;
 	private Employee dataItem = new Employee();
@@ -76,8 +68,9 @@ public class EmployeesList {
 		}				 						
 	}
 
-	public String editEmployee() {		
-		String rowIndex = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().get("rowIndex");			    		 
+	public String editEmployee() throws SQLException {		
+		String rowIndex = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().get("rowIndex");
+		String result ="editEmployee?faces-redirec=true"; 
 		
 		if (rowIndex != null && rowIndex.trim().length() != 0) {
 			setRowIndex(Integer.parseInt(rowIndex)); 
@@ -86,10 +79,12 @@ public class EmployeesList {
 	        System.out.println(dataItem.getName());
 	    } else {
 	    	System.out.println("Не выбрана строка");
+	    	result = "";
 	    }
 		
 		dataItemId.setValue(dataItem.getIdEmploees());
-		return "editEmployee?faces-redirec=true";
+		
+		return result;
 	}
 
 	public HtmlDataTable getDataTableEmployees() {
@@ -116,19 +111,41 @@ public class EmployeesList {
 		this.dataItemId = dataItemId;
 	}
 	
-	public String saveDataItem() {
+	public String saveDataItem() throws SQLException {
+        dataItem.setIdEmploees(Integer.parseInt((String) dataItemId.getValue()));
 
-        // Retain the ID of the data item from hidden input element.
-        dataItem.setIdEmploees((int) dataItemId.getValue());
-
-        // Do your "UPDATE mydata SET values WHERE id" thing.
-        //try {
-            //dataDAO.save(dataItem);
-        //} catch (DAOException e) {
-        //    setErrorMessage(e.getMessage() + " Cause: " + e.getCause());
-        //    e.printStackTrace();
-        //}
+        Connection conn = ds.getConnection();
+        try {
+			PreparedStatement updateEmployee = conn.prepareStatement(
+					"UPDATE Employees " +
+					"SET Name = ?, " +
+					     "Position = ?, " +
+					     "TabNumber = ?, " +
+					     "Telephone = ?, " +
+					     "Login = ? " +
+					"WHERE IdEmploees = ?");
+			updateEmployee.setString(1, dataItem.getName());
+			updateEmployee.setString(2, dataItem.getPosition());
+			updateEmployee.setString(3, dataItem.getTabNumber());
+			updateEmployee.setString(4, dataItem.getTelephone());
+			updateEmployee.setString(5, dataItem.getLogin());
+			updateEmployee.setInt(6, dataItem.getIdEmploees());
+			
+			updateEmployee.execute();
+			
+		}
+		finally {
+			conn.close();
+		}
 
         return "employees"; // Navigation case.
     }
+	
+	public Employee getDataItem() {
+		return dataItem;
+	}
+
+	public void setDataItem(Employee dataItem) {
+		this.dataItem = dataItem;
+	}
 }
