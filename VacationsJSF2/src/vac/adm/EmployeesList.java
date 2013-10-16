@@ -27,7 +27,6 @@ public class EmployeesList implements Serializable{
 	private List<Employee> dataList;	
 	private HtmlDataTable dataTableEmployees;
 	private Employee dataItem = new Employee();
-	private HtmlInputHidden dataItemId = new HtmlInputHidden();
 	private String actionDesc;
 	
 	private int rowIndex;
@@ -80,7 +79,6 @@ public class EmployeesList implements Serializable{
 			dataItem = dataList.get(this.rowIndex - 1);			
 	        System.out.println(rowIndex);
 	        System.out.println(dataItem.getName());
-	        dataItemId.setValue(dataItem.getIdEmploees());
 			setActionDesc("Редагування співробітника");
 	    } else {
 	    	System.out.println("Не выбрана строка");
@@ -91,8 +89,7 @@ public class EmployeesList implements Serializable{
 	}
 	
 	public String addEmployee() throws SQLException {
-		setActionDesc("Внесення нового співробітника");
-		setDataItemId(null);
+		setActionDesc("Внесення нового співробітника");		
 		dataItem = new Employee();
 		
 		return "editEmployee?faces-redirec=true";
@@ -114,14 +111,6 @@ public class EmployeesList implements Serializable{
 		this.rowIndex = rowIndex;
 	}
 
-	public HtmlInputHidden getDataItemId() {
-		return dataItemId;
-	}
-
-	public void setDataItemId(HtmlInputHidden dataItemId) {
-		this.dataItemId = dataItemId;
-	}
-	
 	public String removeEmployee() throws SQLException {
 		System.out.println("preparing to delete");
 		
@@ -130,7 +119,6 @@ public class EmployeesList implements Serializable{
 		if (rowIndex != null && rowIndex.trim().length() != 0) {
 			setRowIndex(Integer.parseInt(rowIndex)); 
 			dataItem = dataList.get(this.rowIndex - 1);			
-	        dataItemId.setValue(dataItem.getIdEmploees());
 	        
 	        Connection conn = ds.getConnection();
 	        try {
@@ -153,9 +141,8 @@ public class EmployeesList implements Serializable{
 	}
 	
 	public String saveDataItem() throws SQLException {		
-		String itemId = (String) dataItemId.getValue();
 		
-		if (itemId.equals(""))	{
+		if (!(dataItem.getIdEmploees()>0))	{
 			System.out.println("preparring to insert");
 			Connection conn = ds.getConnection();
 	        try {
@@ -183,8 +170,7 @@ public class EmployeesList implements Serializable{
 			}
 		}
 		else {
-			System.out.println("preparring to update");
-			dataItem.setIdEmploees(Integer.parseInt((String) dataItemId.getValue()));		
+			System.out.println("preparring to update");	
 	        Connection conn = ds.getConnection();
 	        try {
 				PreparedStatement updateEmployee = conn.prepareStatement(
