@@ -1,2 +1,0 @@
-serviceClass: pkg1.client.GreetingService
-path: 4565FB0074F2A8CEB9C5E4C42E5475FD.gwt.rpc
