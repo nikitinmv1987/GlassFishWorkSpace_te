@@ -1,12 +1,13 @@
 package vac.adm;
 
 import javax.annotation.Resource;
-import javax.enterprise.context.RequestScoped;
+import javax.enterprise.context.SessionScoped;
 import javax.faces.component.html.HtmlDataTable;
 import javax.faces.component.html.HtmlInputHidden;
 import javax.faces.context.FacesContext;
 import javax.sql.DataSource;
 
+import java.io.Serializable;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -18,8 +19,9 @@ import java.util.List;
 import javax.inject.Named; 
 
 @Named
-@RequestScoped
-public class EmployeesList {
+@SessionScoped
+public class EmployeesList implements Serializable{
+	private static final long serialVersionUID = 1L;
 	@Resource(name="vacRes")
 	private DataSource ds;
 	private List<Employee> dataList;	
@@ -90,6 +92,9 @@ public class EmployeesList {
 	
 	public String addEmployee() throws SQLException {
 		setActionDesc("Внесення нового співробітника");
+		setDataItemId(null);
+		dataItem = new Employee();
+		
 		return "editEmployee?faces-redirec=true";
 	}
 
@@ -206,7 +211,7 @@ public class EmployeesList {
 				conn.close();
 			}
 		}	
-
+		
         return "employees"; // Navigation case.
     }	
 	
