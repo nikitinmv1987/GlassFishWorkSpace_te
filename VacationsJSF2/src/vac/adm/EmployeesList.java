@@ -26,6 +26,7 @@ public class EmployeesList {
 	private HtmlDataTable dataTableEmployees;
 	private Employee dataItem = new Employee();
 	private HtmlInputHidden dataItemId = new HtmlInputHidden();
+	private String actionDesc;
 	
 	private int rowIndex;
 	
@@ -78,6 +79,7 @@ public class EmployeesList {
 	        System.out.println(rowIndex);
 	        System.out.println(dataItem.getName());
 	        dataItemId.setValue(dataItem.getIdEmploees());
+			setActionDesc("Редагування співробітника");
 	    } else {
 	    	System.out.println("Не выбрана строка");
 	    	result = "";
@@ -86,7 +88,8 @@ public class EmployeesList {
 		return result;
 	}
 	
-	public String addEmployee() throws SQLException {				
+	public String addEmployee() throws SQLException {
+		setActionDesc("Внесення нового співробітника");
 		return "editEmployee?faces-redirec=true";
 	}
 
@@ -213,5 +216,13 @@ public class EmployeesList {
 
 	public void setDataItem(Employee dataItem) {
 		this.dataItem = dataItem;
+	}
+
+	public String getActionDesc() {
+		return actionDesc;
+	}
+
+	public void setActionDesc(String actionDesc) {
+		this.actionDesc = actionDesc;
 	}
 }
