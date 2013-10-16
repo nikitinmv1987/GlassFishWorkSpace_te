@@ -114,15 +114,44 @@ public class EmployeesList {
 		this.dataItemId = dataItemId;
 	}
 	
-	public String saveDataItem() throws SQLException {
-		System.out.println("lala");
-		System.out.println((String)dataItemId.getValue());
+	public String removeEmployee() throws SQLException {
+		System.out.println("preparing to delete");
+		
+		String rowIndex = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().get("rowIndex");	
+		
+		if (rowIndex != null && rowIndex.trim().length() != 0) {
+			setRowIndex(Integer.parseInt(rowIndex)); 
+			dataItem = dataList.get(this.rowIndex - 1);			
+	        dataItemId.setValue(dataItem.getIdEmploees());
+	        
+	        Connection conn = ds.getConnection();
+	        try {
+				PreparedStatement deleteEmployee = conn.prepareStatement(
+						"DELETE FROM Employees " +
+						"WHERE IdEmploees = ?");
+				
+				deleteEmployee.setInt(1, dataItem.getIdEmploees());							
+				deleteEmployee.execute();				
+			}
+			finally {
+				conn.close();
+			}		
+	        
+	    } else {
+	    	System.out.println("Не выбрана строка");
+	    }
+						
+		return "employees";
+	}
+	
+	public String saveDataItem() throws SQLException {		
 		String itemId = (String) dataItemId.getValue();
+		
 		if (itemId.equals(""))	{
 			System.out.println("preparring to insert");
 			Connection conn = ds.getConnection();
 	        try {
-				PreparedStatement updateEmployee = conn.prepareStatement(
+				PreparedStatement insertEmployee = conn.prepareStatement(
 						"INSERT INTO Employees(" +
 							"Name, " +
 							"Position, " +
@@ -132,14 +161,14 @@ public class EmployeesList {
 							"Admin) " +
 						"VALUES(?, ?, ?, ?, ?, ?)");
 				
-				updateEmployee.setString(1, dataItem.getName());
-				updateEmployee.setString(2, dataItem.getPosition());
-				updateEmployee.setString(3, dataItem.getTabNumber());
-				updateEmployee.setString(4, dataItem.getTelephone());
-				updateEmployee.setString(5, dataItem.getLogin());
-				updateEmployee.setBoolean(6, dataItem.getAdmin());			
+				insertEmployee.setString(1, dataItem.getName());
+				insertEmployee.setString(2, dataItem.getPosition());
+				insertEmployee.setString(3, dataItem.getTabNumber());
+				insertEmployee.setString(4, dataItem.getTelephone());
+				insertEmployee.setString(5, dataItem.getLogin());
+				insertEmployee.setBoolean(6, dataItem.getAdmin());			
 				
-				updateEmployee.execute();				
+				insertEmployee.execute();				
 			}
 			finally {
 				conn.close();
