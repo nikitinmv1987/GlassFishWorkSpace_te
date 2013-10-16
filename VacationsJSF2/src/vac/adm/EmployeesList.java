@@ -77,14 +77,17 @@ public class EmployeesList {
 			dataItem = dataList.get(this.rowIndex - 1);			
 	        System.out.println(rowIndex);
 	        System.out.println(dataItem.getName());
+	        dataItemId.setValue(dataItem.getIdEmploees());
 	    } else {
 	    	System.out.println("Не выбрана строка");
 	    	result = "";
 	    }
-		
-		dataItemId.setValue(dataItem.getIdEmploees());
-		
+						
 		return result;
+	}
+	
+	public String addEmployee() throws SQLException {				
+		return "editEmployee?faces-redirec=true";
 	}
 
 	public HtmlDataTable getDataTableEmployees() {
@@ -112,36 +115,68 @@ public class EmployeesList {
 	}
 	
 	public String saveDataItem() throws SQLException {
-        dataItem.setIdEmploees(Integer.parseInt((String) dataItemId.getValue()));
-
-        Connection conn = ds.getConnection();
-        try {
-			PreparedStatement updateEmployee = conn.prepareStatement(
-					"UPDATE Employees " +
-					"SET Name = ?, " +
-					     "Position = ?, " +
-					     "TabNumber = ?, " +
-					     "Telephone = ?, " +
-					     "Login = ?, " +
-					     "Admin = ? " +
-					"WHERE IdEmploees = ?");
-			updateEmployee.setString(1, dataItem.getName());
-			updateEmployee.setString(2, dataItem.getPosition());
-			updateEmployee.setString(3, dataItem.getTabNumber());
-			updateEmployee.setString(4, dataItem.getTelephone());
-			updateEmployee.setString(5, dataItem.getLogin());
-			updateEmployee.setBoolean(6, dataItem.getAdmin());
-			updateEmployee.setInt(7, dataItem.getIdEmploees());
-			
-			updateEmployee.execute();
-			
+		System.out.println("lala");
+		System.out.println((String)dataItemId.getValue());
+		String itemId = (String) dataItemId.getValue();
+		if (itemId.equals(""))	{
+			System.out.println("preparring to insert");
+			Connection conn = ds.getConnection();
+	        try {
+				PreparedStatement updateEmployee = conn.prepareStatement(
+						"INSERT INTO Employees(" +
+							"Name, " +
+							"Position, " +
+							"TabNumber, " +
+							"Telephone, " +
+							"Login, " +
+							"Admin) " +
+						"VALUES(?, ?, ?, ?, ?, ?)");
+				
+				updateEmployee.setString(1, dataItem.getName());
+				updateEmployee.setString(2, dataItem.getPosition());
+				updateEmployee.setString(3, dataItem.getTabNumber());
+				updateEmployee.setString(4, dataItem.getTelephone());
+				updateEmployee.setString(5, dataItem.getLogin());
+				updateEmployee.setBoolean(6, dataItem.getAdmin());			
+				
+				updateEmployee.execute();				
+			}
+			finally {
+				conn.close();
+			}
 		}
-		finally {
-			conn.close();
-		}
+		else {
+			System.out.println("preparring to update");
+			dataItem.setIdEmploees(Integer.parseInt((String) dataItemId.getValue()));		
+	        Connection conn = ds.getConnection();
+	        try {
+				PreparedStatement updateEmployee = conn.prepareStatement(
+						"UPDATE Employees " +
+						"SET Name = ?, " +
+						     "Position = ?, " +
+						     "TabNumber = ?, " +
+						     "Telephone = ?, " +
+						     "Login = ?, " +
+						     "Admin = ? " +
+						"WHERE IdEmploees = ?");
+				
+				updateEmployee.setString(1, dataItem.getName());
+				updateEmployee.setString(2, dataItem.getPosition());
+				updateEmployee.setString(3, dataItem.getTabNumber());
+				updateEmployee.setString(4, dataItem.getTelephone());
+				updateEmployee.setString(5, dataItem.getLogin());
+				updateEmployee.setBoolean(6, dataItem.getAdmin());
+				updateEmployee.setInt(7, dataItem.getIdEmploees());				
+				
+				updateEmployee.execute();				
+			}
+			finally {
+				conn.close();
+			}
+		}	
 
         return "employees"; // Navigation case.
-    }
+    }	
 	
 	public Employee getDataItem() {
 		return dataItem;
