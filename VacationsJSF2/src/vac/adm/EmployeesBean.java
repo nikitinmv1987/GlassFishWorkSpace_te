@@ -208,17 +208,10 @@ public class EmployeesBean implements Serializable{
 	}
 
 	public int getRowIndex() {
-		
-		System.out.print("get: ");
-		System.out.println(rowIndex);
-		System.out.println("--");
 		return rowIndex;		
 	}
 
 	public void setRowIndex(int rowIndex) {
 		this.rowIndex = rowIndex;
-		System.out.print("set: ");
-		System.out.println(rowIndex);
-		System.out.println("--");
 	}
 }
