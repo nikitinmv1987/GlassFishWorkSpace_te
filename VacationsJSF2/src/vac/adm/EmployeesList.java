@@ -3,7 +3,6 @@ package vac.adm;
 import javax.annotation.Resource;
 import javax.enterprise.context.SessionScoped;
 import javax.faces.component.html.HtmlDataTable;
-import javax.faces.component.html.HtmlInputHidden;
 import javax.faces.context.FacesContext;
 import javax.sql.DataSource;
 
@@ -79,7 +78,7 @@ public class EmployeesList implements Serializable{
 			dataItem = dataList.get(this.rowIndex - 1);			
 	        System.out.println(rowIndex);
 	        System.out.println(dataItem.getName());
-			setActionDesc("Редагування співробітника");
+			actionDesc = "Редагування співробітника";
 	    } else {
 	    	System.out.println("Не выбрана строка");
 	    	result = "";
@@ -89,26 +88,10 @@ public class EmployeesList implements Serializable{
 	}
 	
 	public String addEmployee() throws SQLException {
-		setActionDesc("Внесення нового співробітника");		
+		actionDesc = "Внесення нового співробітника";		
 		dataItem = new Employee();
 		
 		return "editEmployee?faces-redirec=true";
-	}
-
-	public HtmlDataTable getDataTableEmployees() {
-		return dataTableEmployees;
-	}
-
-	public void setDataTableEmployees(HtmlDataTable dataTableEmployees) {
-		this.dataTableEmployees = dataTableEmployees;
-	}
-
-	public int getRowIndex() {
-		return rowIndex;
-	}
-
-	public void setRowIndex(int rowIndex) {
-		this.rowIndex = rowIndex;
 	}
 
 	public String removeEmployee() throws SQLException {
@@ -140,7 +123,7 @@ public class EmployeesList implements Serializable{
 		return "employees";
 	}
 	
-	public String saveDataItem() throws SQLException {		
+	public String saveEmployee() throws SQLException {		
 		
 		if (!(dataItem.getIdEmploees()>0))	{
 			System.out.println("preparring to insert");
@@ -201,19 +184,27 @@ public class EmployeesList implements Serializable{
         return "employees"; // Navigation case.
     }	
 	
-	public Employee getDataItem() {
+	public Employee getItemEmployee() {
 		return dataItem;
-	}
-
-	public void setDataItem(Employee dataItem) {
-		this.dataItem = dataItem;
 	}
 
 	public String getActionDesc() {
 		return actionDesc;
 	}
+	
+	public HtmlDataTable getDataTableEmployees() {
+		return dataTableEmployees;
+	}
 
-	public void setActionDesc(String actionDesc) {
-		this.actionDesc = actionDesc;
+	public void setDataTableEmployees(HtmlDataTable dataTableEmployees) {
+		this.dataTableEmployees = dataTableEmployees;
+	}
+
+	public int getRowIndex() {
+		return rowIndex;
+	}
+
+	public void setRowIndex(int rowIndex) {
+		this.rowIndex = rowIndex;
 	}
 }
