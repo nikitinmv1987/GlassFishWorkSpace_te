@@ -4,6 +4,7 @@ import javax.annotation.Resource;
 import javax.enterprise.context.SessionScoped;
 import javax.faces.component.html.HtmlDataTable;
 import javax.faces.context.FacesContext;
+import javax.inject.Named;
 import javax.sql.DataSource;
 
 import java.io.Serializable;
@@ -15,17 +16,17 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.inject.Named; 
+import vac.adm.models.Employee;
 
 @Named
 @SessionScoped
-public class EmployeesList implements Serializable{
+public class EmployeesBean implements Serializable{
 	private static final long serialVersionUID = 1L;
 	@Resource(name="vacRes")
 	private DataSource ds;
 	private List<Employee> dataList;	
 	private HtmlDataTable dataTableEmployees;
-	private Employee dataItem = new Employee();
+	private Employee itemEmployee = new Employee();
 	private String actionDesc;
 	
 	private int rowIndex;
@@ -68,19 +69,25 @@ public class EmployeesList implements Serializable{
 			conn.close();
 		}				 						
 	}
-
-	public String editEmployee() throws SQLException {		
+	
+	public void setItemEmployee() {
 		String rowIndex = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().get("rowIndex");
-		String result ="editEmployee?faces-redirec=true"; 
-		
 		if (rowIndex != null && rowIndex.trim().length() != 0) {
 			setRowIndex(Integer.parseInt(rowIndex)); 
-			dataItem = dataList.get(this.rowIndex - 1);			
+			itemEmployee = dataList.get(this.rowIndex - 1);			
 	        System.out.println(rowIndex);
-	        System.out.println(dataItem.getName());
-			actionDesc = "Редагування співробітника";
+	        System.out.println(itemEmployee.getName());
 	    } else {
 	    	System.out.println("Не выбрана строка");
+	    }
+	}
+
+	public String editEmployee() throws SQLException {		
+		String result ="editEmployee?faces-redirec=true"; 
+		
+		if (rowIndex > 0) {
+			actionDesc = "Редагування співробітника";
+	    } else {
 	    	result = "";
 	    }
 						
@@ -89,7 +96,7 @@ public class EmployeesList implements Serializable{
 	
 	public String addEmployee() throws SQLException {
 		actionDesc = "Внесення нового співробітника";		
-		dataItem = new Employee();
+		itemEmployee = new Employee();
 		
 		return "editEmployee?faces-redirec=true";
 	}
@@ -101,7 +108,7 @@ public class EmployeesList implements Serializable{
 		
 		if (rowIndex != null && rowIndex.trim().length() != 0) {
 			setRowIndex(Integer.parseInt(rowIndex)); 
-			dataItem = dataList.get(this.rowIndex - 1);			
+			itemEmployee = dataList.get(this.rowIndex - 1);			
 	        
 	        Connection conn = ds.getConnection();
 	        try {
@@ -109,7 +116,7 @@ public class EmployeesList implements Serializable{
 						"DELETE FROM Employees " +
 						"WHERE IdEmploees = ?");
 				
-				deleteEmployee.setInt(1, dataItem.getIdEmploees());							
+				deleteEmployee.setInt(1, itemEmployee.getIdEmploees());							
 				deleteEmployee.execute();				
 			}
 			finally {
@@ -125,7 +132,7 @@ public class EmployeesList implements Serializable{
 	
 	public String saveEmployee() throws SQLException {		
 		
-		if (!(dataItem.getIdEmploees()>0))	{
+		if (!(itemEmployee.getIdEmploees()>0))	{
 			System.out.println("preparring to insert");
 			Connection conn = ds.getConnection();
 	        try {
@@ -139,12 +146,12 @@ public class EmployeesList implements Serializable{
 							"Admin) " +
 						"VALUES(?, ?, ?, ?, ?, ?)");
 				
-				insertEmployee.setString(1, dataItem.getName());
-				insertEmployee.setString(2, dataItem.getPosition());
-				insertEmployee.setString(3, dataItem.getTabNumber());
-				insertEmployee.setString(4, dataItem.getTelephone());
-				insertEmployee.setString(5, dataItem.getLogin());
-				insertEmployee.setBoolean(6, dataItem.getAdmin());			
+				insertEmployee.setString(1, itemEmployee.getName());
+				insertEmployee.setString(2, itemEmployee.getPosition());
+				insertEmployee.setString(3, itemEmployee.getTabNumber());
+				insertEmployee.setString(4, itemEmployee.getTelephone());
+				insertEmployee.setString(5, itemEmployee.getLogin());
+				insertEmployee.setBoolean(6, itemEmployee.getAdmin());			
 				
 				insertEmployee.execute();				
 			}
@@ -166,13 +173,13 @@ public class EmployeesList implements Serializable{
 						     "Admin = ? " +
 						"WHERE IdEmploees = ?");
 				
-				updateEmployee.setString(1, dataItem.getName());
-				updateEmployee.setString(2, dataItem.getPosition());
-				updateEmployee.setString(3, dataItem.getTabNumber());
-				updateEmployee.setString(4, dataItem.getTelephone());
-				updateEmployee.setString(5, dataItem.getLogin());
-				updateEmployee.setBoolean(6, dataItem.getAdmin());
-				updateEmployee.setInt(7, dataItem.getIdEmploees());				
+				updateEmployee.setString(1, itemEmployee.getName());
+				updateEmployee.setString(2, itemEmployee.getPosition());
+				updateEmployee.setString(3, itemEmployee.getTabNumber());
+				updateEmployee.setString(4, itemEmployee.getTelephone());
+				updateEmployee.setString(5, itemEmployee.getLogin());
+				updateEmployee.setBoolean(6, itemEmployee.getAdmin());
+				updateEmployee.setInt(7, itemEmployee.getIdEmploees());				
 				
 				updateEmployee.execute();				
 			}
@@ -185,7 +192,7 @@ public class EmployeesList implements Serializable{
     }	
 	
 	public Employee getItemEmployee() {
-		return dataItem;
+		return itemEmployee;
 	}
 
 	public String getActionDesc() {
@@ -201,10 +208,17 @@ public class EmployeesList implements Serializable{
 	}
 
 	public int getRowIndex() {
-		return rowIndex;
+		
+		System.out.print("get: ");
+		System.out.println(rowIndex);
+		System.out.println("--");
+		return rowIndex;		
 	}
 
 	public void setRowIndex(int rowIndex) {
 		this.rowIndex = rowIndex;
+		System.out.print("set: ");
+		System.out.println(rowIndex);
+		System.out.println("--");
 	}
 }

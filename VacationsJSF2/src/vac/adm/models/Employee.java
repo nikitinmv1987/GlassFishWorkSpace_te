@@ -1,4 +1,4 @@
-package vac.adm;
+package vac.adm.models;
 
 import java.io.Serializable;
 
@@ -12,6 +12,9 @@ public class Employee implements Serializable {
 	private String login;
 	private Boolean admin;
 	
+	public Employee() {
+	}
+	
 	public Employee(int idEmploees, String name, String position, String telephone, 
 			String tabNumber, String login, Boolean admin) {
 		this.idEmploees = idEmploees;
@@ -21,10 +24,7 @@ public class Employee implements Serializable {
 		this.tabNumber = tabNumber;
 		this.login = login;
 		this.admin = admin == true;				
-	}
-	
-	public Employee() {
-	}
+	}	
 
 	public int getIdEmploees() {
 		return idEmploees;
