@@ -19,9 +19,14 @@
          <h:form id="form">	
          	<div class="btn-toolbar">
         	<div class="btn-group">         
-          		<h:commandLink class="btn btn-default" title="Додати" action="#{accrualsBean.addAccrual}">
-	          		<span class="glyphicon glyphicon-plus"></span>
+          		<h:commandLink class="btn btn-default" title="Нарахувати" action="#{accrualsBean.addAccrualPos}">
+	          		<span class="glyphicon glyphicon-euro"></span>
           		</h:commandLink >
+          		
+          		<h:commandLink class="btn btn-default" title="Використати" action="#{accrualsBean.addAccrualNeg}">
+	          		<span class="glyphicon glyphicon-shopping-cart"></span>
+          		</h:commandLink >
+          		
     	  		<h:commandLink class="btn btn-default" title="Редагувати" action="#{accrualsBean.editAccrual}">    	  		
         	  		<span class="glyphicon glyphicon-pencil"></span>
           		</h:commandLink >
