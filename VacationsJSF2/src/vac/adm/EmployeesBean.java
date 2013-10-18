@@ -82,12 +82,15 @@ public class EmployeesBean implements Serializable{
 	    }
 	}
 
-	public String editEmployee() throws SQLException {		
+	public String editEmployee() throws SQLException {
+		System.out.println("preparing to edit");
 		String result ="editEmployee?faces-redirec=true"; 
 		
 		if (rowIndex > 0) {
 			actionDesc = "Редагування співробітника";
 	    } else {
+	    	
+	    	System.out.println("не выбрана строка");
 	    	result = "";
 	    }
 						
@@ -97,6 +100,7 @@ public class EmployeesBean implements Serializable{
 	public String addEmployee() throws SQLException {
 		actionDesc = "Внесення нового співробітника";		
 		itemEmployee = new Employee();
+		setRowIndex(0);
 		
 		return "editEmployee?faces-redirec=true";
 	}
@@ -106,7 +110,7 @@ public class EmployeesBean implements Serializable{
 		
 		String rowIndex = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().get("rowIndex");	
 		
-		if (rowIndex != null && rowIndex.trim().length() != 0) {
+		if (rowIndex != null && rowIndex.trim().length() != 0 && (Integer.parseInt(rowIndex) != 0)) {
 			setRowIndex(Integer.parseInt(rowIndex)); 
 			itemEmployee = dataList.get(this.rowIndex - 1);			
 	        
@@ -127,7 +131,7 @@ public class EmployeesBean implements Serializable{
 	    	System.out.println("Не выбрана строка");
 	    }
 		
-		setRowIndex(-1);
+		setRowIndex(0);
 		return "employees";
 	}
 	
@@ -163,11 +167,11 @@ public class EmployeesBean implements Serializable{
 					returnId = generatedKeys.getInt(1);
 				}		
 				
-				setRowIndex(-1);
 				getEmployeesList();
 				for (Employee empl : dataList) {
 					if (empl.getIdEmploees() == returnId ) {
 						setRowIndex(dataList.indexOf(empl) + 1);
+						itemEmployee = empl;
 					}
 				}
 			}
