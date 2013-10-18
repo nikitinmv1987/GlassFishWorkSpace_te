@@ -26,7 +26,7 @@
   				<h:inputText id="inputDate" type="text" class="form-control" style="width: 300px;" 
   						placeholder="Дата" value="#{accrualsBean.itemAccrual.date}"
   						required="true"	requiredMessage="поле обов'язкове">
-  					<f:convertDateTime pattern="dd.MM.yyyy"/>			
+  					<f:convertDateTime pattern="dd-MM-yyyy" />			
 					<f:ajax event="keyup" render="text1message"/>
 				</h:inputText>
 				<h:message id="text1message" for="inputDate" class="label label-danger" style = "margin-left: 3px;"/>

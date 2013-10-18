@@ -11,6 +11,7 @@ import java.util.List;
 import javax.annotation.Resource;
 import javax.enterprise.context.SessionScoped;
 import javax.faces.component.html.HtmlDataTable;
+import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
 import javax.sql.DataSource;
@@ -76,6 +77,27 @@ public class AccrualsBean implements Serializable{
 		}				 
 	}
 	
+	public Accrual getItemAccrual() {
+		return itemAccrual;
+	}
+	
+	public void setItemAccrual() {
+		String rowIndex = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().get("rowIndex");
+		if (rowIndex != null && rowIndex.trim().length() != 0) {
+			setRowIndex(Integer.parseInt(rowIndex)); 
+			itemAccrual = accrualsList.get(this.rowIndex - 1);			
+	        System.out.println(rowIndex);
+	        System.out.println(itemAccrual.getNote());
+	    } else {
+	    	System.out.println("Не выбрана строка");
+	    }
+	}
+	
+	public String editAccrual() {
+		
+		return "editAccrual";		
+	}
+	
 	public void setEmployeesBean(EmployeesBean employeesBean) {
 		this.employeesBean = employeesBean;
 	}
@@ -102,9 +124,5 @@ public class AccrualsBean implements Serializable{
 
 	public void setDataTableAccruals(HtmlDataTable dataTableAccruals) {
 		this.dataTableAccruals = dataTableAccruals;
-	}
-
-	public Accrual getItemAccrual() {
-		return itemAccrual;
 	}
 }
