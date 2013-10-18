@@ -126,7 +126,8 @@ public class EmployeesBean implements Serializable{
 	    } else {
 	    	System.out.println("Не выбрана строка");
 	    }
-						
+		
+		setRowIndex(-1);
 		return "employees";
 	}
 	
@@ -136,7 +137,7 @@ public class EmployeesBean implements Serializable{
 			System.out.println("preparring to insert");
 			Connection conn = ds.getConnection();
 	        try {
-				PreparedStatement insertEmployee = conn.prepareStatement(
+				PreparedStatement insertEmployee = conn.prepareStatement(						
 						"INSERT INTO Employees(" +
 							"Name, " +
 							"Position, " +
@@ -144,7 +145,7 @@ public class EmployeesBean implements Serializable{
 							"Telephone, " +
 							"Login, " +
 							"Admin) " +
-						"VALUES(?, ?, ?, ?, ?, ?)");
+						"VALUES(?, ?, ?, ?, ?, ?) ", Statement.RETURN_GENERATED_KEYS);						
 				
 				insertEmployee.setString(1, itemEmployee.getName());
 				insertEmployee.setString(2, itemEmployee.getPosition());
@@ -153,11 +154,26 @@ public class EmployeesBean implements Serializable{
 				insertEmployee.setString(5, itemEmployee.getLogin());
 				insertEmployee.setBoolean(6, itemEmployee.getAdmin());			
 				
-				insertEmployee.execute();				
+				insertEmployee.executeUpdate();			
+				
+				ResultSet generatedKeys = insertEmployee.getGeneratedKeys();
+				
+				int returnId = 0;
+				if (generatedKeys.next()) {
+					returnId = generatedKeys.getInt(1);
+				}		
+				
+				setRowIndex(-1);
+				getEmployeesList();
+				for (Employee empl : dataList) {
+					if (empl.getIdEmploees() == returnId ) {
+						setRowIndex(dataList.indexOf(empl) + 1);
+					}
+				}
 			}
 			finally {
 				conn.close();
-			}
+			}	        
 		}
 		else {
 			System.out.println("preparring to update");	
