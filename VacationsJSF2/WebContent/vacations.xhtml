@@ -19,7 +19,20 @@
        	<div>
        		<h3 align="center">
        			<span class="label label-info">#{vacationsBean.employeesBean.itemEmployee.name}</span>	       		
-       		</h3>       		       		
+       		</h3>      
+       		
+       		<h4>
+       			Всього нараховано:
+       			<span class="label label-success">#{vacationsBean.sumPos}</span>
+       		</h4>
+       		<h4>
+       			Всього використано:
+       			<span class="label label-warning">#{vacationsBean.sumNeg}</span>
+       		</h4>
+       		<h4>
+       			Баланс:
+       			<span class="label label-primary">#{vacationsBean.sum}</span>
+       		</h4> 		       		
        	</div>                  	         	                		        		
       		
       		<h:dataTable id="dataTable" 
