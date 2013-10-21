@@ -5,6 +5,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -94,10 +95,145 @@ public class AccrualsBean implements Serializable{
 	}
 	
 	public String editAccrual() {
+		System.out.println("preparing to edit");
+		String result ="editAccrual?faces-redirec=true"; 
 		
-		return "editAccrual";		
+		if (rowIndex > 0) {
+			actionDesc = "Редагування запису";
+	    } else {
+	    	
+	    	System.out.println("не выбрана строка");
+	    	result = "";
+	    }
+						
+		return result;		
 	}
 	
+public String saveAccrual() throws SQLException {		
+		
+		if (!(itemAccrual.getIdRecord()>0))	{
+			System.out.println("preparring to insert");
+			Connection conn = ds.getConnection();
+	        try {
+				PreparedStatement insertAccrual = conn.prepareStatement(						
+						"INSERT INTO Vacations(" +
+							"IdEmloyee, " +
+							"Date, " +
+							"Reason, " +
+							"Volume, " +
+							"Note) " +
+						"VALUES(?, ?, ?, ?, ?) ", Statement.RETURN_GENERATED_KEYS);						
+				
+				insertAccrual.setInt(1, employeesBean.getItemEmployee().getIdEmploees());
+				insertAccrual.setDate(2, new java.sql.Date(itemAccrual.getDate().getTime()));
+				insertAccrual.setString(3, itemAccrual.getReason());
+				insertAccrual.setDouble(4, itemAccrual.getVolume());
+				insertAccrual.setString(5, itemAccrual.getNote());	
+				
+				insertAccrual.executeUpdate();			
+				
+				ResultSet generatedKeys = insertAccrual.getGeneratedKeys();
+				
+				int returnId = 0;
+				if (generatedKeys.next()) {
+					returnId = generatedKeys.getInt(1);
+				}		
+				
+				refreshWithSetPosion(returnId);				
+			}
+			finally {
+				conn.close();
+			}	        
+		}
+		else {
+			System.out.println("preparring to update");	
+	        Connection conn = ds.getConnection();
+	        try {
+				PreparedStatement updateAccrual = conn.prepareStatement(
+						"UPDATE Vacations " +
+						"SET IdEmloyee = ?, " +
+						     "Date = ?, " +
+						     "Reason = ?, " +
+						     "Volume = ?, " +
+						     "Note = ? " +
+						"WHERE IdRecord = ?");
+				
+				updateAccrual.setInt(1, itemAccrual.getIdEmployee());
+				updateAccrual.setDate(2, new java.sql.Date(itemAccrual.getDate().getTime()));
+				updateAccrual.setString(3, itemAccrual.getReason());
+				updateAccrual.setDouble(4, itemAccrual.getVolume());
+				updateAccrual.setString(5, itemAccrual.getNote());
+				updateAccrual.setInt(6, itemAccrual.getIdRecord());				
+				
+				updateAccrual.execute();	
+				
+				refreshWithSetPosion(itemAccrual.getIdRecord());
+			}
+			finally {
+				conn.close();
+			}
+		}	
+		
+        return "accruals"; // Navigation case.
+    }
+	
+	private void refreshWithSetPosion(int id) throws SQLException {
+		getAccrualsList();
+		for (Accrual acr : accrualsList) {
+			if (acr.getIdRecord() == id ) {
+				setRowIndex(accrualsList.indexOf(acr) + 1);
+				itemAccrual = acr;
+			}
+		}
+	
+	}
+	
+	public String addAccrualPos() throws SQLException {
+		actionDesc = "Нарахування відгулу";		
+		itemAccrual = new Accrual();
+		setRowIndex(0);
+		
+		return "editAccrual?faces-redirec=true";
+	}
+	
+	public String addAccrualNeg() throws SQLException {
+		actionDesc = "Використання відгулу";		
+		itemAccrual = new Accrual();
+		setRowIndex(0);
+		
+		return "editAccrual?faces-redirec=true";
+	}
+	
+	public String removeAccrual() throws SQLException {
+		System.out.println("preparing to delete");
+		
+		String rowIndex = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().get("rowIndex");	
+		
+		if (rowIndex != null && rowIndex.trim().length() != 0 && (Integer.parseInt(rowIndex) != 0)) {
+			setRowIndex(Integer.parseInt(rowIndex)); 
+			itemAccrual = accrualsList.get(this.rowIndex - 1);			
+	        
+	        Connection conn = ds.getConnection();
+	        try {
+				PreparedStatement deleteEmployee = conn.prepareStatement(
+						"DELETE FROM Vacations " +
+						"WHERE IdRecord = ?");
+				
+				deleteEmployee.setInt(1, itemAccrual.getIdRecord());							
+				deleteEmployee.execute();				
+			}
+			finally {
+				conn.close();
+			}		
+	        
+	    } else {
+	    	System.out.println("Не выбрана строка");
+	    }
+		
+		setRowIndex(0);
+		return "accruals";
+	}
+
 	public void setEmployeesBean(EmployeesBean employeesBean) {
 		this.employeesBean = employeesBean;
 	}
