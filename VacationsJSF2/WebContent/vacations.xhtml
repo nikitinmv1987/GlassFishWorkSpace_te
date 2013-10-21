@@ -15,12 +15,16 @@
          	Начислення            
          </ui:define>          	
          <ui:define name="content">
-         
-       	<div>
-       		<h3 align="center">
-       			<span class="label label-info">#{vacationsBean.employeesBean.itemEmployee.name}</span>	       		
-       		</h3>      
-       		
+        
+        <h:form> 
+       	<div>       	
+       		<h:selectOneMenu value="#{employeesBean.itemEmployee.idEmploees}">
+       			<f:selectItems value="#{employeesBean.employeesList}" var="empl" 
+       				itemLabel="#{empl.name}" itemValue="#{empl.idEmploees}">       				      				
+       			</f:selectItems>
+       			<f:ajax listener="#{employeesBean.setItemEmployeeDropDown}" render="dataTable"/> 
+       		</h:selectOneMenu>	       		          		          		 
+       	 
        		<h4>
        			Всього нараховано:
        			<span class="label label-success">#{vacationsBean.sumPos}</span>
@@ -32,7 +36,8 @@
        		<h4>
        			Баланс:
        			<span class="label label-primary">#{vacationsBean.sum}</span>
-       		</h4> 		       		
+       		</h4> 	
+      		
        	</div>                  	         	                		        		
       		
       		<h:dataTable id="dataTable" 
@@ -63,7 +68,7 @@
          		</h:column>
       			      	             	 	            	 	
       		</h:dataTable>				
-				     	 
+		 </h:form>
          </ui:define>         
       </ui:composition>
    </body>

@@ -24,7 +24,7 @@ public class EmployeesBean implements Serializable{
 	private static final long serialVersionUID = 1L;
 	@Resource(name="vacRes")
 	private DataSource ds;
-	private List<Employee> dataList;	
+	private List<Employee> employeesList;	
 	private HtmlDataTable dataTableEmployees;
 	private Employee itemEmployee = new Employee();
 	private String actionDesc;
@@ -48,9 +48,9 @@ public class EmployeesBean implements Serializable{
 						"E.Admin " +
 					"FROM dbo.Employees E ORDER BY E.Name");
 			
-			dataList = new ArrayList<Employee>();			
+			employeesList = new ArrayList<Employee>();			
 			while (result.next()) {
-				dataList.add(new Employee(
+				employeesList.add(new Employee(
 						result.getInt("IdEmploees"),
 						result.getString("Name"),
 						result.getString("Position"),
@@ -61,7 +61,7 @@ public class EmployeesBean implements Serializable{
 						));
 			}
 						
-			return dataList;
+			return employeesList;
 		} 
 		
 		finally
@@ -74,12 +74,25 @@ public class EmployeesBean implements Serializable{
 		String rowIndex = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().get("rowIndex");
 		if (rowIndex != null && rowIndex.trim().length() != 0) {
 			setRowIndex(Integer.parseInt(rowIndex)); 
-			itemEmployee = dataList.get(this.rowIndex - 1);			
+			itemEmployee = employeesList.get(this.rowIndex - 1);			
 	        System.out.println(rowIndex);
 	        System.out.println(itemEmployee.getName());
 	    } else {
 	    	System.out.println("Не выбрана строка");
 	    }
+	}
+	
+	public void setItemEmployeeDropDown() {		
+			System.out.println("-drop down-");
+			System.out.println("name=" + itemEmployee.getName());
+			System.out.println("id=" + itemEmployee.getIdEmploees());
+	        System.out.println("---");
+	        
+	        for (Employee empl : employeesList) {
+				if (empl.getIdEmploees() == itemEmployee.getIdEmploees()) {
+					setRowIndex(employeesList.indexOf(empl) + 1);					
+				}
+			} 
 	}
 
 	public String editEmployee() throws SQLException {
@@ -112,7 +125,7 @@ public class EmployeesBean implements Serializable{
 		
 		if (rowIndex != null && rowIndex.trim().length() != 0 && (Integer.parseInt(rowIndex) != 0)) {
 			setRowIndex(Integer.parseInt(rowIndex)); 
-			itemEmployee = dataList.get(this.rowIndex - 1);			
+			itemEmployee = employeesList.get(this.rowIndex - 1);			
 	        
 	        Connection conn = ds.getConnection();
 	        try {
@@ -168,9 +181,9 @@ public class EmployeesBean implements Serializable{
 				}		
 				
 				getEmployeesList();
-				for (Employee empl : dataList) {
+				for (Employee empl : employeesList) {
 					if (empl.getIdEmploees() == returnId ) {
-						setRowIndex(dataList.indexOf(empl) + 1);
+						setRowIndex(employeesList.indexOf(empl) + 1);
 						itemEmployee = empl;
 					}
 				}
