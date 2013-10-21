@@ -30,6 +30,7 @@ public class AccrualsBean implements Serializable{
 	private HtmlDataTable dataTableAccruals;
 	private Accrual itemAccrual = new Accrual();
 	private String actionDesc;
+	private int actionId;
 
 	@Inject
 	private EmployeesBean employeesBean;
@@ -100,6 +101,7 @@ public class AccrualsBean implements Serializable{
 		
 		if (rowIndex > 0) {
 			actionDesc = "Редагування запису";
+			setActionId(1); 
 	    } else {
 	    	
 	    	System.out.println("не выбрана строка");
@@ -189,7 +191,8 @@ public String saveAccrual() throws SQLException {
 	}
 	
 	public String addAccrualPos() throws SQLException {
-		actionDesc = "Нарахування відгулу";		
+		actionDesc = "Нарахування відгулу";
+		setActionId(2);
 		itemAccrual = new Accrual();
 		setRowIndex(0);
 		
@@ -197,7 +200,8 @@ public String saveAccrual() throws SQLException {
 	}
 	
 	public String addAccrualNeg() throws SQLException {
-		actionDesc = "Використання відгулу";		
+		actionDesc = "Використання відгулу";
+		setActionId(3);
 		itemAccrual = new Accrual();
 		setRowIndex(0);
 		
@@ -261,4 +265,13 @@ public String saveAccrual() throws SQLException {
 	public void setDataTableAccruals(HtmlDataTable dataTableAccruals) {
 		this.dataTableAccruals = dataTableAccruals;
 	}
+
+	public int getActionId() {
+		return actionId;
+	}
+
+	public void setActionId(int actionId) {
+		this.actionId = actionId;
+	}
+
 }

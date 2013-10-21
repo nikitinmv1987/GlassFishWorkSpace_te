@@ -37,7 +37,7 @@
   				<span class="input-group-addon" style="width: 150px; text-align: left;">Причина</span>
   				<h:inputText id="inputReason" type="text" class="form-control" style="width: 300px;" 
   						placeholder="Причина" value="#{accrualsBean.itemAccrual.reason}"
-  						required="true" requiredMessage="поле обов'язкове">
+  						required="true" requiredMessage="поле обов'язкове" readonly="#{(accrualsBean.actionId == 3)}">
   					<f:ajax event="keyup" render="text2message"/>
 				</h:inputText>
 				<h:message id="text2message" for="inputReason" class="label label-danger" style = "margin-left: 3px;"/>
@@ -59,7 +59,7 @@
   				<span class="input-group-addon" style="width: 150px; text-align: left;">Коментар</span>
   				<h:inputText id="inputNote" type="text" class="form-control" style="width: 300px;" 
   						placeholder="Коментар" value="#{accrualsBean.itemAccrual.note}"
-  						required="true" requiredMessage="поле обов'язкове">
+  						required="true" requiredMessage="поле обов'язкове" readonly="#{(accrualsBean.actionId == 2)}">
   					<f:ajax event="keyup" render="text3message"/>
 				</h:inputText>
 				<h:message id="text3message" for="inputNote" class="label label-danger" style = "margin-left: 3px;"/>
