@@ -237,6 +237,10 @@ public String saveAccrual() throws SQLException {
 		setRowIndex(0);
 		return "accruals";
 	}
+	
+	public EmployeesBean getEmployeesBean() {
+		return employeesBean;
+	}
 
 	public void setEmployeesBean(EmployeesBean employeesBean) {
 		this.employeesBean = employeesBean;

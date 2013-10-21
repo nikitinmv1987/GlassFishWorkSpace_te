@@ -208,7 +208,7 @@ public class EmployeesBean implements Serializable{
 			}
 		}	
 		
-        return "employees"; // Navigation case.
+        return "employees"; 
     }	
 	
 	public Employee getItemEmployee() {
