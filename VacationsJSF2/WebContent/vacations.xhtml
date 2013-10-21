@@ -18,12 +18,14 @@
         
         <h:form> 
        	<div>       	
-       		<h:selectOneMenu value="#{employeesBean.itemEmployee.idEmploees}">
+       		<h4>
+       		<h:selectOneMenu styleClass="bootstrap-select" value="#{employeesBean.itemEmployee.idEmploees}">
        			<f:selectItems value="#{employeesBean.employeesList}" var="empl" 
        				itemLabel="#{empl.name}" itemValue="#{empl.idEmploees}">       				      				
        			</f:selectItems>
        			<f:ajax listener="#{employeesBean.setItemEmployeeDropDown}" render="dataTable"/> 
-       		</h:selectOneMenu>	       		          		          		 
+       		</h:selectOneMenu>
+       		</h4>	       		          		          		 
        	 
        		<h4>
        			Всього нараховано:

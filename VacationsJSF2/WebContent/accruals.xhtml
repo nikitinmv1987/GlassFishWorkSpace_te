@@ -14,15 +14,23 @@
          <ui:define name="windowTitle">
          	Начислення            
          </ui:define>          	
-         <ui:define name="content">
+         <ui:define name="content">                	
          
-       	<div>
+         <h:form id="form">
+            <h4>
+       		<h:selectOneMenu styleClass="bootstrap-select" value="#{employeesBean.itemEmployee.idEmploees}">
+       			<f:selectItems value="#{employeesBean.employeesList}" var="empl" 
+       				itemLabel="#{empl.name}" itemValue="#{empl.idEmploees}">       				      				
+       			</f:selectItems>
+       			<f:ajax listener="#{employeesBean.setItemEmployeeDropDown}" render="dataTable"/> 
+       		</h:selectOneMenu>
+       		</h4>
+         	<div>
        		<h3 align="center">
        			<span class="label label-info">#{accrualsBean.employeesBean.itemEmployee.name}</span>	       		
        		</h3>       	       		       			       		       		
-       	</div>
-         
-         <h:form id="form">	
+       		</div>
+         	
          	<div class="btn-toolbar">
         	<div class="btn-group">         
           		<h:commandLink class="btn btn-default" title="Нарахувати" action="#{accrualsBean.addAccrualPos}">
