@@ -24,21 +24,16 @@
        			</f:selectItems>
        			<f:ajax listener="#{employeesBean.setItemEmployeeDropDown}" render="dataTable"/> 
        		</h:selectOneMenu>
-       		</h4>
-         	<div>
-       		<h3 align="center">
-       			<span class="label label-info">#{accrualsBean.employeesBean.itemEmployee.name}</span>	       		
-       		</h3>       	       		       			       		       		
-       		</div>
+       		</h4>         	
          	
          	<div class="btn-toolbar">
         	<div class="btn-group">         
           		<h:commandLink class="btn btn-default" title="Нарахувати" action="#{accrualsBean.addAccrualPos}">
-	          		<span class="glyphicon glyphicon-euro"></span>
+	          		<span class="glyphicon glyphicon-plus"></span>
           		</h:commandLink >
           		
           		<h:commandLink class="btn btn-default" title="Використати" action="#{accrualsBean.addAccrualNeg}">
-	          		<span class="glyphicon glyphicon-shopping-cart"></span>
+	          		<span class="glyphicon glyphicon-minus"></span>
           		</h:commandLink >
           		
     	  		<h:commandLink class="btn btn-default" title="Редагувати" action="#{accrualsBean.editAccrual}">    	  		

@@ -16,30 +16,32 @@
          </ui:define>          	
          <ui:define name="content">
         
-        <h:form> 
+        <h:form id = "vacForm"> 
        	<div>       	
        		<h4>
        		<h:selectOneMenu styleClass="bootstrap-select" value="#{employeesBean.itemEmployee.idEmploees}">
        			<f:selectItems value="#{employeesBean.employeesList}" var="empl" 
        				itemLabel="#{empl.name}" itemValue="#{empl.idEmploees}">       				      				
        			</f:selectItems>
-       			<f:ajax listener="#{employeesBean.setItemEmployeeDropDown}" render="dataTable"/> 
+       			<f:ajax listener="#{employeesBean.setItemEmployeeDropDown}" render="vacForm"/> 
        		</h:selectOneMenu>
        		</h4>	       		          		          		 
        	 
-       		<h4>
-       			Всього нараховано:
-       			<span class="label label-success">#{vacationsBean.sumPos}</span>
-       		</h4>
-       		<h4>
-       			Всього використано:
-       			<span class="label label-warning">#{vacationsBean.sumNeg}</span>
-       		</h4>
-       		<h4>
-       			Баланс:
-       			<span class="label label-primary">#{vacationsBean.sum}</span>
-       		</h4> 	
-      		
+       	 	
+       	 	<table>
+       	 		<tr>
+       	 			<td><h4>Всього нараховано:</h4></td>
+       				<td><h4><span class="label label-success">#{vacationsBean.sumPos}</span></h4></td>       					
+       			</tr>
+       			<tr>
+       				<td><h4>Всього використано:</h4></td>
+       				<td><h4><span class="label label-warning">#{vacationsBean.sumNeg}</span></h4></td>
+       			</tr>
+       			<tr>
+       				<td><h4>Баланс:</h4></td>
+       				<td><h4><span class="label label-primary">#{vacationsBean.sum}</span></h4></td>
+       			</tr>       			 	
+      		</table>
        	</div>                  	         	                		        		
       		
       		<h:dataTable id="dataTable" 
