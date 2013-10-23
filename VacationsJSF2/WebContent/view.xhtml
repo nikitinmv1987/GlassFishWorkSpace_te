@@ -5,27 +5,21 @@
 	  xmlns:f="http://java.sun.com/jsf/core"
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:h="http://java.sun.com/jsf/html">
-   <head>
-     <title>IGNORED</title>
-     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />   	 
-   </head>
-   <body>
-     <ui:composition template="/templates/masterLayout.xhtml">     
-         <ui:define name="windowTitle">
-         	Начислення            
-         </ui:define>          	
-         <ui:define name="content">
-        
-        <h:form id = "vacForm"> 
-       	<div>       	
-       		<h4>
-       		<h:selectOneMenu styleClass="bootstrap-select" value="#{employeesBean.itemEmployee.idEmploees}">
-       			<f:selectItems value="#{employeesBean.employeesList}" var="empl" 
-       				itemLabel="#{empl.name}" itemValue="#{empl.idEmploees}">       				      				
-       			</f:selectItems>
-       			<f:ajax listener="#{employeesBean.setItemEmployeeDropDown}" render="vacForm"/> 
-       		</h:selectOneMenu>
-       		</h4>	
+   <h:head>
+     <title>Відгули</title>
+     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /> 
+	 <h:outputStylesheet library="css" name="styles.css"/>         
+     <h:outputStylesheet name="bootstrap.css" library="bootstrap/css"/>
+     <h:outputScript name="jquery.js" library="bootstrap/js"/>
+     <h:outputScript name="bootstrap.js" library="bootstrap/js"/>
+     <h:outputScript name="main.js" library="js"/> 	 
+   </h:head>
+   <h:body style="padding: 35px;">                 
+        <h:form>         
+       	<div>           		   	
+       		<h3><span class="label label-default">
+       			<h:outputText value="#{vacationsBean.itemEmployeeByLogin}"/>
+       		</span></h3>	
        		       		          		          		        	        	 	
        	 	<table>
        	 		<tr>
@@ -43,8 +37,7 @@
       		</table>
        	</div>                  	         	                		        		
       		
-      		<h:dataTable id="dataTable" 
-      			class="table table-bordered table-hover" 
+      		<h:dataTable class="table table-bordered table-hover" 
       			value="#{vacationsBean.accrualsList}" var="accrual">      			         			          	
           		           		
          		<h:column>
@@ -71,7 +64,5 @@
       			      	             	 	            	 	
       		</h:dataTable>				
 		 </h:form>
-         </ui:define>         
-      </ui:composition>
-   </body>
+   </h:body>
 </html>

@@ -31,6 +31,15 @@ public class EmployeesBean implements Serializable{
 	
 	private int rowIndex;
 	
+	public void setItemEmployeeByLogin(String login) throws SQLException {
+		
+		for (Employee empl : getEmployeesList()) {
+			if (empl.getLogin().equalsIgnoreCase(login)) {
+				itemEmployee = empl;
+				setRowIndex(employeesList.indexOf(empl) + 1);					
+			}
+		} 
+	}
 	
 	public List<Employee> getEmployeesList() throws SQLException { 		
 		Connection conn = ds.getConnection();
@@ -222,7 +231,7 @@ public class EmployeesBean implements Serializable{
 		}	
 		
         return "employees"; 
-    }	
+    }		
 	
 	public Employee getItemEmployee() {
 		return itemEmployee;

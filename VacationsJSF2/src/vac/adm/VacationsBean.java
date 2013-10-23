@@ -10,7 +10,6 @@ import java.util.List;
 
 import javax.annotation.Resource;
 import javax.enterprise.context.SessionScoped;
-import javax.faces.component.html.HtmlDataTable;
 import javax.inject.Inject;
 import javax.inject.Named;
 import javax.sql.DataSource;
@@ -25,10 +24,15 @@ public class VacationsBean implements Serializable{
 	@Resource(name="vacRes")
 	private DataSource ds;
 	private List<Accrual> accrualsList;	
-	private HtmlDataTable dataTableAccruals;
 
 	@Inject
 	private EmployeesBean employeesBean;
+	
+	public String getItemEmployeeByLogin() throws SQLException {			
+		employeesBean.setItemEmployeeByLogin("nikitinmaksi");
+		
+		return employeesBean.getItemEmployee().getName();
+	}
 	
 	public double getSum() throws SQLException {
 		Connection conn = ds.getConnection();
@@ -152,11 +156,4 @@ public class VacationsBean implements Serializable{
 		this.employeesBean = employeesBean;
 	}
 	
-	public HtmlDataTable getDataTableAccruals() {
-		return dataTableAccruals;
-	}
-
-	public void setDataTableAccruals(HtmlDataTable dataTableAccruals) {
-		this.dataTableAccruals = dataTableAccruals;
-	}	
 }
