@@ -45,7 +45,7 @@ public class TestSignProject implements EntryPoint {
 		rootPanel2.add(verticalPanel2);
 		
 		Button btnSend = new Button();
-		btnSend.setText("Send to Server");
+		btnSend.setText("Віправити на сервер");
 		verticalPanel2.add(btnSend);
 		btnSend.setWidth("150px");
 		
@@ -75,7 +75,7 @@ public class TestSignProject implements EntryPoint {
 		});
 		
 		Button btnGet = new Button();
-		btnGet.setText("Get from Server");
+		btnGet.setText("Зчитати з серверу");
 		btnGet.setWidth("150px");
 		verticalPanel2.add(btnGet);
 		
