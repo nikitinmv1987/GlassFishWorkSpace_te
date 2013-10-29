@@ -49,21 +49,22 @@ public class TestSignProject implements EntryPoint {
 		verticalPanel2.add(btnSend);
 		btnSend.setWidth("150px");
 		
-		final TestDoc doc = new TestDoc();
+		final TestDoc doc = new TestDoc();		
 		
 		btnSend.addClickHandler(new ClickHandler() {		
 			public void onClick(ClickEvent event) {
 				doc.setFirstRow(stringData1.getText());
 				doc.setSecondRow(stringData2.getText());
 				doc.setSignature(resultText.getText());
+				
 				stringData1.setText("");
 				stringData2.setText("");
 				resultText.setText("");
-				
+																					
 				greetingService.pushTestDoc(doc, new AsyncCallback<String>() {
 					
 					public void onSuccess(String result) {						
-						System.out.println("yes");
+						System.out.println(result);
 					}
 					
 					public void onFailure(Throwable caught) {
