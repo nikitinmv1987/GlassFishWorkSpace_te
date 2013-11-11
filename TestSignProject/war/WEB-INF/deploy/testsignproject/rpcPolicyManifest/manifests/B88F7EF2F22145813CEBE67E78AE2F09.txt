@@ -1,2 +1,0 @@
-serviceClass: testSign.client.GreetingService
-path: 359432BDB14593F1D5370812828EE7D1.gwt.rpc

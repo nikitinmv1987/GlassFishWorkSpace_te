@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	  xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html">
+   <head>
+     <title>IGNORED</title>
+     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+   </head>
+   <body>
+      <ui:composition template="/templates/masterLayout.xhtml">     
+         <ui:define name="windowTitle">
+         	Співробітники            
+         </ui:define>          	
+         <ui:define name="content">
+         
+         <h:form id="form">	
+         	<div class="btn-toolbar">
+        	<div class="btn-group">         
+          		<h:commandLink class="btn btn-default" title="Додати" action="#{employeesBean.addEmployee}">
+	          		<span class="glyphicon glyphicon-plus"></span>
+          		</h:commandLink >
+    	  		<h:commandLink class="btn btn-default" title="Редагувати" action="#{employeesBean.editEmployee}">    	  		
+        	  		<span class="glyphicon glyphicon-pencil"></span>
+          		</h:commandLink >
+          		<h:commandLink class="btn btn-default" title="Вилучити" action="#{employeesBean.removeEmployee}">
+          			<span class="glyphicon glyphicon-remove"></span>
+          		</h:commandLink>
+        	</div>
+        	</div>        
+         		<h:dataTable id="dataTable" 
+         			class="table table-bordered table-hover" 
+         			value="#{employeesBean.employeesList}" var="employee"
+         			binding="#{employeesBean.dataTableEmployees}">         			          	
+					<f:ajax listener="#{employeesBean.setItemEmployee}" event="click"/>		           		           		
+            		<h:column>
+            		 	<f:facet name="header">Співробітник</f:facet>
+               			#{employee.name}
+            		</h:column>
+
+            		<h:column>
+            			<f:facet name="header">Посада</f:facet>
+               			#{employee.position}
+            		</h:column>
+            		
+            		<h:column>
+            			<f:facet name="header">Табельний номер</f:facet>
+               			#{employee.tabNumber}
+            		</h:column>
+            		
+            		<h:column>
+            			<f:facet name="header">Телефон</f:facet>
+               			#{employee.telephone}
+            		</h:column>
+         			      	             	 	            	 	
+         		</h:dataTable>				
+				
+				<input id="rowIndex" type="hidden" name="rowIndex" value ="#{employeesBean.rowIndex}"/>
+				
+         	</h:form>
+      	    <script>
+                addOnclickToDatatableRows();
+       </script>
+      	 
+         </ui:define>         
+      </ui:composition>
+          
+   </body>
+</html>

@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	  xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html">
+   <head>
+     <title>IGNORED</title>
+     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+   </head>
+   <body>
+      <ui:composition template="/templates/masterLayout.xhtml">     
+         <ui:define name="windowTitle">
+         	Редагування співробіника            
+         </ui:define>          	
+         <ui:define name="content">
+         
+         <h:form class="bs-example-form">
+         	
+         	<div class="highlight">
+         	<h4>#{employeesBean.actionDesc}</h4> 			
+
+			<div class="input-group">			
+  				<span class="input-group-addon" style="width: 150px; text-align: left;">ПІБ</span>
+  				<h:inputText id="inputName" type="text" class="form-control" style="width: 300px;" 
+  						placeholder="ПІБ" value="#{employeesBean.itemEmployee.name}"
+  						required="true"	requiredMessage="поле обов'язкове">			
+					<f:ajax event="keyup" render="text1message"/>
+				</h:inputText>
+				<h:message id="text1message" for="inputName" class="label label-danger" style = "margin-left: 3px;"/>
+			</div>
+			<br></br>
+			
+			<div class="input-group">
+  				<span class="input-group-addon" style="width: 150px; text-align: left;">Посада</span>
+  				<h:inputText id="inputPos" type="text" class="form-control" style="width: 300px;" 
+  						placeholder="Посада" value="#{employeesBean.itemEmployee.position}"
+  						required="true" requiredMessage="поле обов'язкове">
+  					<f:ajax event="keyup" render="text2message"/>
+				</h:inputText>
+				<h:message id="text2message" for="inputPos" class="label label-danger" style = "margin-left: 3px;"/>
+			</div>
+			<br></br>
+
+			<div class="input-group">
+  				<span class="input-group-addon" style="width: 150px; text-align: left;">Табельний номер</span>
+  				<h:inputText id="inputTabNumber" type="text" class="form-control" style="width: 300px;" 
+  						placeholder="Табельний номер" value="#{employeesBean.itemEmployee.tabNumber}"
+  						required="true" requiredMessage="поле обов'язкове">
+  					<f:ajax event="keyup" render="text3message"/>
+				</h:inputText>
+				<h:message id="text3message" for="inputTabNumber" class="label label-danger" style = "margin-left: 3px;"/>
+			</div>	
+			<br></br>
+
+			<div class="input-group">
+  				<span class="input-group-addon" style="width: 150px; text-align: left;">Телефон</span>
+  				<h:inputText id="inputPhone" type="text" class="form-control" style="width: 300px;" 
+  						placeholder="Телефон" value="#{employeesBean.itemEmployee.telephone}"
+  						required="true" requiredMessage="поле обов'язкове">
+  					<f:ajax event="keyup" render="text4message"/>
+				</h:inputText>
+				<h:message id="text4message" for="inputPhone" class="label label-danger" style = "margin-left: 3px;"/>
+			</div>
+				<br></br>
+			
+			<div class="input-group">
+  				<span class="input-group-addon" style="width: 150px; text-align: left;">Користувач AD</span>
+  				<h:inputText id="inputLogin" type="text" class="form-control" style="width: 300px;" 
+  						placeholder="Користувач AD" value="#{employeesBean.itemEmployee.login}"
+  						required="true" requiredMessage="поле обов'язкове">
+  					<f:ajax event="keyup" render="text5message"/>
+				</h:inputText>
+				<h:message id="text5message" for="inputLogin" class="label label-danger" style = "margin-left: 3px;"/>
+			</div>	       	   		
+			<br></br>
+			
+			<div class="input-group">  				
+  				<h:selectBooleanCheckbox value="#{employeesBean.itemEmployee.admin}">
+  					Адміністратор системи управління відгулами
+  				</h:selectBooleanCheckbox>
+  				
+			</div>   		
+    		<br></br>    		
+    		
+    		<h:commandLink class="btn btn-success" style="width: 160px;" action="#{employeesBean.saveEmployee}">
+    			<span class="glyphicon glyphicon-floppy-disk"/>
+    			Зберегти
+    		</h:commandLink> 
+
+    		<h:commandLink class="btn btn-default" style="margin-left: 20px; width: 160px;" action="employees?faces-redirec=true" immediate="true">
+    			<span class="glyphicon glyphicon-remove"/>
+    			Повернутися
+    		</h:commandLink>
+    		</div>
+       	 </h:form>
+          	 
+         </ui:define>         
+      </ui:composition>
+      
+    
+   </body>
+</html>

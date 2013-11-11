@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	  xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html">
+   <head>
+     <title>IGNORED</title>
+     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />   	 
+   </head>
+   <body>
+     <ui:composition template="/templates/masterLayout.xhtml">     
+         <ui:define name="windowTitle">
+         	Начислення            
+         </ui:define>          	
+         <ui:define name="content">                	
+         
+         <h:form id="form">
+            <h4>
+       		<h:selectOneMenu styleClass="bootstrap-select" value="#{employeesBean.itemEmployee.idEmploees}">
+       			<f:selectItems value="#{employeesBean.employeesList}" var="empl" 
+       				itemLabel="#{empl.name}" itemValue="#{empl.idEmploees}">       				      				
+       			</f:selectItems>
+       			<f:ajax listener="#{employeesBean.setItemEmployeeDropDown}" render="dataTable"/> 
+       		</h:selectOneMenu>
+       		</h4>         	
+         	
+         	<div class="btn-toolbar">
+        	<div class="btn-group">         
+          		<h:commandLink class="btn btn-default" title="Нарахувати" action="#{accrualsBean.addAccrualPos}">
+	          		<span class="glyphicon glyphicon-plus"></span>
+          		</h:commandLink >
+          		
+          		<h:commandLink class="btn btn-default" title="Використати" action="#{accrualsBean.addAccrualNeg}">
+	          		<span class="glyphicon glyphicon-minus"></span>
+          		</h:commandLink >
+          		
+    	  		<h:commandLink class="btn btn-default" title="Редагувати" action="#{accrualsBean.editAccrual}">    	  		
+        	  		<span class="glyphicon glyphicon-pencil"></span>
+          		</h:commandLink >
+          		<h:commandLink class="btn btn-default" title="Вилучити" action="#{accrualsBean.removeAccrual}">
+          			<span class="glyphicon glyphicon-remove"></span>
+          		</h:commandLink>
+        	</div>        	
+        	</div>                		        		 
+         		<h:dataTable id="dataTable" 
+         			class="table table-bordered table-hover" 
+         			value="#{accrualsBean.accrualsList}" var="accrual"
+         			binding="#{accrualsBean.dataTableAccruals}">
+         			<f:ajax listener="#{accrualsBean.setItemAccrual}" event="click"/>         			          	
+		           		           		
+            		<h:column>
+            		 	<f:facet name="header">Дата</f:facet>
+               			<h:outputText value="#{accrual.date}">
+               				 <f:convertDateTime pattern="dd.MM.yyyy" timeZone="Europe/Kiev"/>
+               			</h:outputText>
+            		</h:column>
+
+            		<h:column>
+            			<f:facet name="header">Причина</f:facet>
+               			#{accrual.reason}
+            		</h:column>
+            		
+            		<h:column>
+            			<f:facet name="header">Кількість</f:facet>
+               			#{accrual.volume}
+            		</h:column>
+            		
+            		<h:column>
+            			<f:facet name="header">Коментар</f:facet>
+               			#{accrual.note}
+            		</h:column>
+         			      	             	 	            	 	
+         		</h:dataTable>				
+				
+				<input id="rowIndex" type="hidden" name="rowIndex" value ="#{accrualsBean.rowIndex}"/>
+				
+         	</h:form>
+      	    <script>
+                addOnclickToDatatableRows();
+       </script>
+      	 
+         </ui:define>         
+      </ui:composition>
+   </body>
+</html>

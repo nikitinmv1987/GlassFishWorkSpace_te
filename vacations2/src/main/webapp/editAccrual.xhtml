@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	  xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html">
+   <head>
+     <title>IGNORED</title>
+     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+   </head>
+   <body>
+      <ui:composition template="/templates/masterLayout.xhtml">     
+         <ui:define name="windowTitle">
+         	Редагування вілгулів            
+         </ui:define>          	
+         <ui:define name="content">
+         
+         <h:form class="bs-example-form">
+         	
+         	<div class="highlight">
+         	<h4>#{accrualsBean.actionDesc}</h4> 			
+
+			<div class="input-group">			
+  				<span class="input-group-addon" style="width: 150px; text-align: left;">Дата</span>
+  				<h:inputText id="inputDate" type="text" class="form-control" style="width: 300px;" 
+  						placeholder="Дата" value="#{accrualsBean.itemAccrual.date}"
+  						required="true"	requiredMessage="поле обов'язкове">
+  					<f:convertDateTime pattern="dd.MM.yyyy" timeZone="Europe/Kiev"/>
+					<f:ajax event="keyup" render="text1message"/>
+				</h:inputText>
+				<h:message id="text1message" for="inputDate" class="label label-danger" style = "margin-left: 3px;"/>
+			</div>
+			<br></br>
+			
+			<div class="input-group">
+  				<span class="input-group-addon" style="width: 150px; text-align: left;">Причина</span>
+  				<h:inputText id="inputReason" type="text" class="form-control" style="width: 300px;" 
+  						placeholder="Причина" value="#{accrualsBean.itemAccrual.reason}"
+  						required="true" requiredMessage="поле обов'язкове" readonly="#{(accrualsBean.actionId == 3)}">
+  					<f:ajax event="keyup" render="text2message"/>
+				</h:inputText>
+				<h:message id="text2message" for="inputReason" class="label label-danger" style = "margin-left: 3px;"/>
+			</div>
+			<br></br>
+			
+			<div class="input-group">
+  				<span class="input-group-addon" style="width: 150px; text-align: left;">Кількість</span>
+  				<h:inputText id="inputVolume" type="text" class="form-control" style="width: 300px;" 
+  						placeholder="Кількість" value="#{accrualsBean.itemAccrual.volume}"
+  						required="true" requiredMessage="поле обов'язкове">
+  					<f:ajax event="keyup" render="text4message"/>
+				</h:inputText>
+				<h:message id="text4message" for="inputVolume" class="label label-danger" style = "margin-left: 3px;"/>
+			</div>
+				<br></br>
+
+			<div class="input-group">
+  				<span class="input-group-addon" style="width: 150px; text-align: left;">Коментар</span>
+  				<h:inputText id="inputNote" type="text" class="form-control" style="width: 300px;" 
+  						placeholder="Коментар" value="#{accrualsBean.itemAccrual.note}"
+  						required="true" requiredMessage="поле обов'язкове" readonly="#{(accrualsBean.actionId == 2)}">
+  					<f:ajax event="keyup" render="text3message"/>
+				</h:inputText>
+				<h:message id="text3message" for="inputNote" class="label label-danger" style = "margin-left: 3px;"/>
+			</div>	
+			<br></br>									    		
+    		
+    		<h:commandLink class="btn btn-success" style="width: 160px;" action="#{accrualsBean.saveAccrual}">
+    			<span class="glyphicon glyphicon-floppy-disk"/>
+    			Зберегти
+    		</h:commandLink> 
+
+    		<h:commandLink class="btn btn-default" style="margin-left: 20px; width: 160px;" action="accruals?faces-redirec=true" immediate="true">
+    			<span class="glyphicon glyphicon-remove"/>
+    			Повернутися
+    		</h:commandLink>
+    		</div>
+       	 </h:form>
+          	 
+         </ui:define>         
+      </ui:composition>
+      
+    
+   </body>
+</html>

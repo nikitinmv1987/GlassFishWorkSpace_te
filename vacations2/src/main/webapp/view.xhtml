@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	  xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html">
+   <h:head>
+     <title>Відгули</title>
+     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /> 
+	 <h:outputStylesheet library="css" name="styles.css"/>         
+     <h:outputStylesheet name="bootstrap.css" library="bootstrap/css"/>
+     <h:outputScript name="jquery.js" library="bootstrap/js"/>
+     <h:outputScript name="bootstrap.js" library="bootstrap/js"/>
+     <h:outputScript name="main.js" library="js"/> 	 
+   </h:head>
+   <h:body style="padding: 35px;">                 
+        <h:form>         
+       	<div>           		   	
+       		<h3><span class="label label-default">
+       			<h:outputText value="#{vacationsBean.itemEmployeeByLogin}"/>
+       		</span></h3>	
+       		       		          		          		        	        	 	
+       	 	<table>
+       	 		<tr>
+       	 			<td><h4>Всього нараховано:</h4></td>
+       				<td><h4><span class="label label-success">#{vacationsBean.sumPos}</span></h4></td>       					
+       			</tr>
+       			<tr>
+       				<td><h4>Всього використано:</h4></td>
+       				<td><h4><span class="label label-warning">#{vacationsBean.sumNeg}</span></h4></td>
+       			</tr>
+       			<tr>
+       				<td><h4>Баланс:</h4></td>
+       				<td><h4><span class="label label-primary">#{vacationsBean.sum}</span></h4></td>
+       			</tr>       			 	
+      		</table>
+       	</div>                  	         	                		        		
+      		
+      		<h:dataTable class="table table-bordered table-hover" 
+      			value="#{vacationsBean.accrualsList}" var="accrual">      			         			          	
+          		           		
+         		<h:column>
+         		 	<f:facet name="header">Дата</f:facet>
+            			<h:outputText value="#{accrual.date}">
+            				 <f:convertDateTime pattern="dd.MM.yyyy" timeZone="Europe/Kiev"/>
+            			</h:outputText>
+         		</h:column>
+
+         		<h:column>
+         			<f:facet name="header">Причина</f:facet>
+            			#{accrual.reason}
+         		</h:column>
+         		
+         		<h:column>
+         			<f:facet name="header">Кількість</f:facet>
+            			#{accrual.volume}
+         		</h:column>
+         		
+         		<h:column>
+         			<f:facet name="header">Коментар</f:facet>
+            			#{accrual.note}
+         		</h:column>
+      			      	             	 	            	 	
+      		</h:dataTable>				
+		 </h:form>
+   </h:body>
+</html>
