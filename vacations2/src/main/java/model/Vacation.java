@@ -1,7 +1,9 @@
 package model;
 
 import java.io.Serializable;
+
 import javax.persistence.*;
+
 import java.sql.Timestamp;
 import java.math.BigDecimal;
 
@@ -40,7 +42,7 @@ public class Vacation implements Serializable {
 
 	//bi-directional many-to-one association to Employee
 	@ManyToOne
-	@JoinColumn(name="IdEmloyee")
+	@JoinColumn(name="IdEmloyee")	
 	private Employee employee;
 
 	public Vacation() {

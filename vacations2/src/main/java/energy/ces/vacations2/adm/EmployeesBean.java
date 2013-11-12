@@ -24,6 +24,7 @@ public class EmployeesBean implements Serializable{
 	private HtmlDataTable dataTableEmployees;
 	private Employee itemEmployee = new Employee();
 	private String actionDesc;
+	private int selectedItem;
 	
 	private int rowIndex;
 	
@@ -38,7 +39,8 @@ public class EmployeesBean implements Serializable{
 		for (Employee empl : getEmployeesList()) {
 			if (empl.getLogin().equalsIgnoreCase(login)) {
 				itemEmployee = empl;
-				setRowIndex(employeesList.indexOf(empl) + 1);					
+				setRowIndex(employeesList.indexOf(empl) + 1);	
+				selectedItem = empl.getIdEmploees();
 			}
 		} 
 	}
@@ -55,7 +57,8 @@ public class EmployeesBean implements Serializable{
 		String rowIndex = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().get("rowIndex");
 		if (rowIndex != null && rowIndex.trim().length() != 0) {
 			setRowIndex(Integer.parseInt(rowIndex)); 
-			itemEmployee = employeesList.get(this.rowIndex - 1);			
+			itemEmployee = employeesList.get(this.rowIndex - 1);
+			selectedItem = itemEmployee.getIdEmploees();
 	        System.out.println(rowIndex);
 	        System.out.println(itemEmployee.getName());
 	    } else {
@@ -63,17 +66,14 @@ public class EmployeesBean implements Serializable{
 	    }
 	}
 	
-	public void setItemEmployeeDropDown() {		
-			System.out.println("-drop down-");
-			System.out.println("name=" + itemEmployee.getName());
-			System.out.println("id=" + itemEmployee.getIdEmploees());
-	        System.out.println("---");
-	        
-	        for (Employee empl : employeesList) {
-				if (empl.getIdEmploees() == itemEmployee.getIdEmploees()) {
-					setRowIndex(employeesList.indexOf(empl) + 1);					
-				}
-			} 
+	public void setItemEmployeeDropDown() {		    	        
+        for (Employee empl : employeesList) {
+        	if (empl.getIdEmploees() == selectedItem) {
+        		setRowIndex(employeesList.indexOf(empl) + 1);
+        		itemEmployee = empl;
+				System.out.println("index=" + employeesList.indexOf(empl));
+			}
+		} 
 	}
 
 	public String editEmployee() {
@@ -161,5 +161,13 @@ public class EmployeesBean implements Serializable{
 
 	public void setRowIndex(int rowIndex) {
 		this.rowIndex = rowIndex;
+	}
+
+	public int getSelectedItem() {
+		return selectedItem;
+	}
+
+	public void setSelectedItem(int selectedItem) {
+		this.selectedItem = selectedItem;
 	}
 }

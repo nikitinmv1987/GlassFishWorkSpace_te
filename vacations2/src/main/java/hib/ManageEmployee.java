@@ -32,10 +32,7 @@ public class ManageEmployee {
 	@SuppressWarnings("unchecked")
 	public List<Employee> getEmplList() {				
 		@SuppressWarnings("rawtypes")
-		List result = session.createQuery( "from Employee" ).list();
-		for ( Employee employee : (List<Employee>) result ) {
-		    System.out.println(employee.getName() + " " + employee.getPosition());
-		}	
+		List result = session.createQuery( "from Employee order by name" ).list();		
 		return result;
 	}
 	
@@ -44,6 +41,7 @@ public class ManageEmployee {
         session.update(employee);   
         tx.commit();
 	}
+	
 	public short addEmployee(Employee employee) {
 		Short employeeID = null;
 		Transaction tx = session.beginTransaction();		

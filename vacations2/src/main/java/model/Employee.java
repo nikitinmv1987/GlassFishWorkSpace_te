@@ -1,7 +1,9 @@
 package model;
 
 import java.io.Serializable;
+
 import javax.persistence.*;
+
 import java.util.List;
 
 
@@ -38,8 +40,8 @@ public class Employee implements Serializable {
 	@Column(name="Telephone")
 	private String telephone;
 
-	//bi-directional many-to-one association to Vacation
 	@OneToMany(mappedBy="employee")
+	@OrderBy("date desc")
 	private List<Vacation> vacations;
 
 	public Employee() {

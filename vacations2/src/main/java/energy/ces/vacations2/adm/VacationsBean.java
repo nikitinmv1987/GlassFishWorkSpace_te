@@ -14,6 +14,7 @@ import javax.inject.Inject;
 import javax.inject.Named;
 import javax.sql.DataSource;
 
+import model.Vacation;
 import energy.ces.vacations2.adm.models.Accrual;
 
 @Named
@@ -110,6 +111,14 @@ public class VacationsBean implements Serializable{
 		System.out.println("preparing to get accruals");
 		System.out.println(employeesBean.getItemEmployee().getName());
 		Connection conn = ds.getConnection();
+		
+		
+		
+		for (Vacation vacation : employeesBean.getItemEmployee().getVacations()) {
+			System.out.println(vacation.getVolume());
+		}
+		
+		
 		try {
 			PreparedStatement stmt = conn.prepareStatement(
 					"Use Vacations " +

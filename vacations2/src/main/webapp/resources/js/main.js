@@ -20,8 +20,10 @@ function highlightAndSelectRow(tr) {
 }
 
 window.onload = function highlightSelectedRow() {
-    var trs = document.getElementById('form:dataTable').getElementsByTagName('tbody')[0]
-        .getElementsByTagName('tr');
-    var i = document.getElementById("rowIndex").value -1; 
-    trs[i].bgColor = '#f5f5f5';
-}
+	if (document.getElementById('form:dataTable')!=null) {
+	    var trs = document.getElementById('form:dataTable').getElementsByTagName('tbody')[0]
+	        .getElementsByTagName('tr');
+	    var i = document.getElementById("rowIndex").value -1; 
+	    trs[i].bgColor = '#f5f5f5';
+	}
+};
