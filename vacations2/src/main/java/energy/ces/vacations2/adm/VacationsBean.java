@@ -28,14 +28,7 @@ public class VacationsBean implements Serializable{
 		return employeesBean.getItemEmployee().getName();
 	}
 	
-	public List<Vacation> getVacationList() {
-		System.out.println("preparing to get accruals");
-		System.out.println(employeesBean.getItemEmployee().getName());
-		
-			
-		//for (Vacation vacation : employeesBean.getItemEmployee().getVacations()) {
-		//	System.out.println(vacation.getVolume());
-		//}		
+	public List<Vacation> getVacationList() {	
 		return employeesBean.getItemEmployee().getVacations();					 
 	}
 	
