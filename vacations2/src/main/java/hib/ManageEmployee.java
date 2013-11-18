@@ -32,8 +32,8 @@ public class ManageEmployee {
 	@SuppressWarnings("unchecked")
 	public List<Employee> getEmplList() {				
 		@SuppressWarnings("rawtypes")
-		List result = session.createQuery( "from Employee order by name" ).list();		
-		return result;
+		List result = session.createQuery("select E from Employee E order by E.name").list();		
+		return result;  
 	}
 	
 	public void update(Employee employee) {
@@ -60,5 +60,5 @@ public class ManageEmployee {
     public Employee getById(short s) {
         return (Employee) session.get(Employee.class, s);
     }
-
+        
 }

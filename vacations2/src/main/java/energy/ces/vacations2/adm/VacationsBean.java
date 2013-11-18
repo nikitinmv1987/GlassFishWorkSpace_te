@@ -1,11 +1,6 @@
 package energy.ces.vacations2.adm;
 
 import java.io.Serializable;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -15,7 +10,6 @@ import javax.inject.Named;
 import javax.sql.DataSource;
 
 import model.Vacation;
-import energy.ces.vacations2.adm.models.Accrual;
 
 @Named
 @SessionScoped
@@ -24,137 +18,25 @@ public class VacationsBean implements Serializable{
 
 	@Resource(name="vacRes")
 	private DataSource ds;
-	private List<Accrual> accrualsList;	
 
 	@Inject
 	private EmployeesBean employeesBean;
 	
-	public String getItemEmployeeByLogin() throws SQLException {			
+	public String getItemEmployeeByLogin() {			
 		employeesBean.setItemEmployeeByLogin("nikitinmaksi");
 		
 		return employeesBean.getItemEmployee().getName();
 	}
 	
-	public double getSum() throws SQLException {
-		Connection conn = ds.getConnection();
-		double result;
-		try {
-			PreparedStatement stmt = conn.prepareStatement(
-					"Use Vacations " +
-					"SELECT " +
-						"SUM(Volume) BALANCE " +
-					"FROM Vacations " +
-					"WHERE IdEmloyee = ?");
-			
-			stmt.setInt(1, employeesBean.getItemEmployee().getIdEmploees());			
-			ResultSet rs = stmt.executeQuery();
-			
-			rs.next();
-			result = rs.getDouble("BALANCE");
-		}
-		finally
-		{
-			conn.close();
-		}
-		return result;	
-	}
-	
-	public double getSumPos() throws SQLException {
-		Connection conn = ds.getConnection();
-		double result;
-		try {
-			PreparedStatement stmt = conn.prepareStatement(
-					"Use Vacations " +
-					"SELECT " +
-						"SUM(Volume) SUMPOS " +
-					"FROM Vacations " +
-					"WHERE Volume>0 AND IdEmloyee = ?");
-			
-			stmt.setInt(1, employeesBean.getItemEmployee().getIdEmploees());			
-			ResultSet rs = stmt.executeQuery();
-			
-			rs.next();
-			result = rs.getDouble("SUMPOS");
-		}
-		finally
-		{
-			conn.close();
-		}
-		return result;	
-	}
-	
-	public double getSumNeg() throws SQLException {
-		Connection conn = ds.getConnection();
-		double result;
-		try {
-			PreparedStatement stmt = conn.prepareStatement(
-					"Use Vacations " +
-					"SELECT " +
-						"ABS(SUM(Volume)) SUMNEG " +
-					"FROM Vacations " +
-					"WHERE Volume<0 AND IdEmloyee = ?");
-			
-			stmt.setInt(1, employeesBean.getItemEmployee().getIdEmploees());			
-			ResultSet rs = stmt.executeQuery();
-			
-			rs.next();
-			result = rs.getDouble("SUMNEG");
-		}
-		finally
-		{
-			conn.close();
-		}
-		return result;	
-	}
-	
-	public List<Accrual> getAccrualsList() throws SQLException {
+	public List<Vacation> getVacationList() {
 		System.out.println("preparing to get accruals");
 		System.out.println(employeesBean.getItemEmployee().getName());
-		Connection conn = ds.getConnection();
 		
-		
-		
-		for (Vacation vacation : employeesBean.getItemEmployee().getVacations()) {
-			System.out.println(vacation.getVolume());
-		}
-		
-		
-		try {
-			PreparedStatement stmt = conn.prepareStatement(
-					"Use Vacations " +
-					"SELECT " +
-						"IdRecord, " +
-						"IdEmloyee, " +
-						"Date, " +
-						"Reason, " +
-						"Volume, " +
-						"Note " +
-					"FROM Vacations " +
-					"WHERE IdEmloyee = ? " +
-					"ORDER BY Date DESC");
-			stmt.setInt(1, employeesBean.getItemEmployee().getIdEmploees());
 			
-			ResultSet result = stmt.executeQuery();
-			
-			accrualsList = new ArrayList<Accrual>();			
-			while (result.next()) {
-				accrualsList.add(new Accrual(
-						result.getInt("IdRecord"),						
-						result.getInt("IdEmloyee"),
-						result.getDate("Date"),
-						result.getString("Reason"),
-						result.getDouble("Volume"),
-						result.getString("Note")
-						));
-			}
-						
-			return accrualsList;
-		} 
-		
-		finally
-		{
-			conn.close();
-		}				 
+		//for (Vacation vacation : employeesBean.getItemEmployee().getVacations()) {
+		//	System.out.println(vacation.getVolume());
+		//}		
+		return employeesBean.getItemEmployee().getVacations();					 
 	}
 	
 	public EmployeesBean getEmployeesBean() {

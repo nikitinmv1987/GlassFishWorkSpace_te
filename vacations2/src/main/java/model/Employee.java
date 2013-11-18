@@ -1,19 +1,25 @@
 package model;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 
 import javax.persistence.*;
 
+import org.hibernate.annotations.Formula;
+
 import java.util.List;
+
+import model.Vacation;
 
 
 /**
  * The persistent class for the Employees database table.
  * 
  */
+
 @Entity
 @Table(name="Employees")
-@NamedQuery(name="Employee.findAll", query="SELECT e FROM Employee e")
+
 public class Employee implements Serializable {
 	private static final long serialVersionUID = 1L;
 
@@ -38,12 +44,21 @@ public class Employee implements Serializable {
 	private String tabNumber;
 
 	@Column(name="Telephone")
-	private String telephone;
-
+	private String telephone;		
+	
 	@OneToMany(mappedBy="employee")
 	@OrderBy("date desc")
 	private List<Vacation> vacations;
 
+	@Formula("(select ISNULL(SUM(v.Volume), 0) from Vacations v where v.IdEmloyee = IdEmploees)")	
+	private BigDecimal balance;
+	
+	@Formula("(select ISNULL(SUM(CASE WHEN v.Volume > 0 THEN ABS(v.Volume) ELSE 0 END), 0) from Vacations v where v.IdEmloyee = IdEmploees)")	
+	private BigDecimal posBalance;
+	
+	@Formula("(select ISNULL(SUM(CASE WHEN v.Volume < 0 THEN ABS(v.Volume) ELSE 0 END), 0) from Vacations v where v.IdEmloyee = IdEmploees)")	
+	private BigDecimal negBalance;
+	
 	public Employee() {
 	}
 
@@ -123,6 +138,30 @@ public class Employee implements Serializable {
 		vacation.setEmployee(null);
 
 		return vacation;
+	}
+
+	public BigDecimal getBalance() {
+		return balance;
+	}
+
+	public void setBalance(BigDecimal balance) {
+		this.balance = balance;
+	}
+
+	public BigDecimal getPosBalance() {
+		return posBalance;
+	}
+
+	public void setPosBalance(BigDecimal posBalance) {
+		this.posBalance = posBalance;
+	}
+
+	public BigDecimal getNegBalance() {
+		return negBalance;
+	}
+
+	public void setNegBalance(BigDecimal negBalance) {
+		this.negBalance = negBalance;
 	}
 
 }

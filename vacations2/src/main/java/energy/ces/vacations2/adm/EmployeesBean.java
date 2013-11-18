@@ -48,7 +48,7 @@ public class EmployeesBean implements Serializable{
 	public List<Employee> getEmployeesList() { 	
 		
 		if (employeesList == null) { 
-			employeesList = ME.getEmplList();
+			updateEmplList();
 		}
 		return employeesList;			 						
 	}
@@ -108,13 +108,19 @@ public class EmployeesBean implements Serializable{
 			setRowIndex(Integer.parseInt(rowIndex)); 
 			itemEmployee = employeesList.get(this.rowIndex - 1);				        
 			ME.deleteEmployee(itemEmployee);
-			employeesList = ME.getEmplList();
+			updateEmplList();
 	    } else {
 	    	System.out.println("удалено");
 	    }
 		
 		setRowIndex(0);
 		return "employees";
+	}
+
+	public void updateEmplList() {
+		
+		
+		employeesList = ME.getEmplList();
 	}
 	
 	public String saveEmployee() {		
@@ -123,7 +129,7 @@ public class EmployeesBean implements Serializable{
 			System.out.println("preparring to insert");
 			
 			int returnId = ME.addEmployee(itemEmployee);										
-			employeesList =  ME.getEmplList();
+			updateEmplList();
 			for (Employee empl : employeesList) {
 				if (empl.getIdEmploees() == returnId ) {
 					setRowIndex(employeesList.indexOf(empl) + 1);
@@ -137,7 +143,7 @@ public class EmployeesBean implements Serializable{
 		}	
 		
         return "employees"; 
-    }		
+    }
 	
 	public Employee getItemEmployee() {
 		return itemEmployee;
