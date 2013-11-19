@@ -3,11 +3,11 @@ package model;
 import java.io.Serializable;
 import java.math.BigDecimal;
 
-import javax.persistence.*;
-
 import org.hibernate.annotations.Formula;
 
 import java.util.List;
+
+import javax.persistence.*;
 
 import model.Vacation;
 
@@ -26,7 +26,7 @@ public class Employee implements Serializable {
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	@Column(name="IdEmploees")
-	private short idEmploees;
+	private int idEmploees;
 
 	@Column(name="Admin")
 	private boolean admin;
@@ -62,11 +62,11 @@ public class Employee implements Serializable {
 	public Employee() {
 	}
 
-	public short getIdEmploees() {
+	public int getIdEmploees() {
 		return this.idEmploees;
 	}
 
-	public void setIdEmploees(short idEmploees) {
+	public void setIdEmploees(int idEmploees) {
 		this.idEmploees = idEmploees;
 	}
 

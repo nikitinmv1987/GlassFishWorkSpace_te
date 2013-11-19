@@ -3,6 +3,7 @@ package hib;
 import java.util.List;
 
 import model.Employee;
+import model.Vacation;
 
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
@@ -42,10 +43,9 @@ public class ManageEmployee {
         tx.commit();
 	}
 	
-	public short addEmployee(Employee employee) {
-		Short employeeID = null;
+	public int addEmployee(Employee employee) {
 		Transaction tx = session.beginTransaction();		
-	    employeeID = (Short) session.save(employee);
+	    int employeeID = (Integer)session.save(employee);
 	    tx.commit();
 	    
 		return employeeID;
@@ -57,8 +57,29 @@ public class ManageEmployee {
 	    tx.commit();
 	}
 	
-    public Employee getById(short s) {
+    public Employee getById(int s) {
         return (Employee) session.get(Employee.class, s);
     }
+    
+/*	@SuppressWarnings("unchecked")
+	public List<Vacation> getVacList(int idEmployee) {				
+		Query query = session.createQuery( "from Vacation where idEmloyee = :id order by date desc" );
+		query.setParameter("id", idEmployee);
+		query.setFirstResult(0);
+		query.setMaxResults(20);
+		@SuppressWarnings("rawtypes")
+		List result = query.list();
+		
+		return result;
+	}
+*/
+	
+	public int addVacation(Vacation vacation) {
+		Transaction tx = session.beginTransaction();		
+		int vacationID = (Integer) session.save(vacation);
+	    tx.commit();
+	    
+		return vacationID;
+	}
         
 }

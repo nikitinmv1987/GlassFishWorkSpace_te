@@ -5,6 +5,7 @@ import java.io.Serializable;
 import javax.persistence.*;
 
 import java.sql.Timestamp;
+import java.util.Date;
 import java.math.BigDecimal;
 
 
@@ -19,6 +20,7 @@ public class Vacation implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
+	@GeneratedValue(strategy=GenerationType.AUTO)
 	@Column(name="IdRecord")
 	private int idRecord;
 
@@ -29,7 +31,7 @@ public class Vacation implements Serializable {
 	private String auditUser;
 
 	@Column(name="Date")
-	private Timestamp date;
+	private Date date;
 
 	@Column(name="Note")
 	private String note;
@@ -39,7 +41,7 @@ public class Vacation implements Serializable {
 
 	@Column(name="Volume")
 	private BigDecimal volume;
-
+	
 	//bi-directional many-to-one association to Employee
 	@ManyToOne
 	@JoinColumn(name="IdEmloyee")	
@@ -72,15 +74,15 @@ public class Vacation implements Serializable {
 		this.auditUser = auditUser;
 	}
 
-	public Timestamp getDate() {
+	public Date getDate() {
 		return this.date;
 	}
 
-	public void setDate(Timestamp date) {
+	public void setDate(Date date) {
 		this.date = date;
 	}
 
-	public Object getNote() {
+	public String getNote() {
 		return this.note;
 	}
 
@@ -88,7 +90,7 @@ public class Vacation implements Serializable {
 		this.note = note;
 	}
 
-	public Object getReason() {
+	public String getReason() {
 		return this.reason;
 	}
 
@@ -111,5 +113,4 @@ public class Vacation implements Serializable {
 	public void setEmployee(Employee employee) {
 		this.employee = employee;
 	}
-
 }

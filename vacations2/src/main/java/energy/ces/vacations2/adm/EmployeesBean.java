@@ -34,6 +34,14 @@ public class EmployeesBean implements Serializable{
 		ME = new ManageEmployee();
 	}
 	
+	public ManageEmployee getME() {
+		return ME;
+	}
+
+	public void setME(ManageEmployee mE) {
+		ME = mE;
+	}
+
 	public void setItemEmployeeByLogin(String login) {
 		
 		for (Employee empl : getEmployeesList()) {
@@ -77,7 +85,6 @@ public class EmployeesBean implements Serializable{
 	}
 
 	public String editEmployee() {
-		System.out.println("preparing to edit");
 		String result ="editEmployee?faces-redirec=true"; 
 		
 		if (rowIndex > 0) {
@@ -117,17 +124,13 @@ public class EmployeesBean implements Serializable{
 		return "employees";
 	}
 
-	public void updateEmplList() {
-		
-		
+	public void updateEmplList() {			
 		employeesList = ME.getEmplList();
 	}
 	
 	public String saveEmployee() {		
 		
-		if (!(itemEmployee.getIdEmploees()>0))	{
-			System.out.println("preparring to insert");
-			
+		if (!(itemEmployee.getIdEmploees() > 0))	{		
 			int returnId = ME.addEmployee(itemEmployee);										
 			updateEmplList();
 			for (Employee empl : employeesList) {
@@ -138,7 +141,6 @@ public class EmployeesBean implements Serializable{
 				}        
 		}
 		else {
-			System.out.println("preparring to update");	
 	        ME.update(itemEmployee);
 		}	
 		

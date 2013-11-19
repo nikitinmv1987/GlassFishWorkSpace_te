@@ -28,48 +28,48 @@
          	
          	<div class="btn-toolbar">
         	<div class="btn-group">         
-          		<h:commandLink class="btn btn-default" title="Нарахувати" action="#{accrualsBean.addAccrualPos}">
+          		<h:commandLink class="btn btn-default" title="Нарахувати" action="#{accrualsBean.addVacationPos}">
 	          		<span class="glyphicon glyphicon-plus"></span>
           		</h:commandLink >
           		
-          		<h:commandLink class="btn btn-default" title="Використати" action="#{accrualsBean.addAccrualNeg}">
+          		<h:commandLink class="btn btn-default" title="Використати" action="#{accrualsBean.addVacationNeg}">
 	          		<span class="glyphicon glyphicon-minus"></span>
           		</h:commandLink >
           		
-    	  		<h:commandLink class="btn btn-default" title="Редагувати" action="#{accrualsBean.editAccrual}">    	  		
+    	  		<h:commandLink class="btn btn-default" title="Редагувати" action="#{accrualsBean.editVacation}">    	  		
         	  		<span class="glyphicon glyphicon-pencil"></span>
           		</h:commandLink >
-          		<h:commandLink class="btn btn-default" title="Вилучити" action="#{accrualsBean.removeAccrual}">
+          		<h:commandLink class="btn btn-default" title="Вилучити" action="#{accrualsBean.removeVacation}">
           			<span class="glyphicon glyphicon-remove"></span>
           		</h:commandLink>
         	</div>        	
         	</div>                		        		 
          		<h:dataTable id="dataTable" 
          			class="table table-bordered table-hover" 
-         			value="#{accrualsBean.accrualsList}" var="accrual"
-         			binding="#{accrualsBean.dataTableAccruals}">
-         			<f:ajax listener="#{accrualsBean.setItemAccrual}" event="click"/>         			          	
+         			value="#{accrualsBean.vacationsList}" var="vacation"
+         			binding="#{accrualsBean.dataTableVacations}">
+         			<f:ajax listener="#{accrualsBean.setItemVacation}" event="click"/>         			          	      			          	
 		           		           		
             		<h:column>
             		 	<f:facet name="header">Дата</f:facet>
-               			<h:outputText value="#{accrual.date}">
+               			<h:outputText value="#{vacation.date}">
                				 <f:convertDateTime pattern="dd.MM.yyyy" timeZone="Europe/Kiev"/>
                			</h:outputText>
             		</h:column>
 
             		<h:column>
             			<f:facet name="header">Причина</f:facet>
-               			#{accrual.reason}
+               			#{vacation.reason}
             		</h:column>
             		
             		<h:column>
             			<f:facet name="header">Кількість</f:facet>
-               			#{accrual.volume}
+               			#{vacation.volume}
             		</h:column>
             		
             		<h:column>
             			<f:facet name="header">Коментар</f:facet>
-               			#{accrual.note}
+               			#{vacation.note}
             		</h:column>
          			      	             	 	            	 	
          		</h:dataTable>				

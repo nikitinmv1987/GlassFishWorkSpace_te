@@ -24,7 +24,7 @@
 			<div class="input-group">			
   				<span class="input-group-addon" style="width: 150px; text-align: left;">Дата</span>
   				<h:inputText id="inputDate" type="text" class="form-control" style="width: 300px;" 
-  						placeholder="Дата" value="#{accrualsBean.itemAccrual.date}"
+  						placeholder="Дата" value="#{accrualsBean.itemVacation.date}"
   						required="true"	requiredMessage="поле обов'язкове">
   					<f:convertDateTime pattern="dd.MM.yyyy" timeZone="Europe/Kiev"/>
 					<f:ajax event="keyup" render="text1message"/>
@@ -36,7 +36,7 @@
 			<div class="input-group">
   				<span class="input-group-addon" style="width: 150px; text-align: left;">Причина</span>
   				<h:inputText id="inputReason" type="text" class="form-control" style="width: 300px;" 
-  						placeholder="Причина" value="#{accrualsBean.itemAccrual.reason}"
+  						placeholder="Причина" value="#{accrualsBean.itemVacation.reason}"
   						required="true" requiredMessage="поле обов'язкове" readonly="#{(accrualsBean.actionId == 3)}">
   					<f:ajax event="keyup" render="text2message"/>
 				</h:inputText>
@@ -47,7 +47,7 @@
 			<div class="input-group">
   				<span class="input-group-addon" style="width: 150px; text-align: left;">Кількість</span>
   				<h:inputText id="inputVolume" type="text" class="form-control" style="width: 300px;" 
-  						placeholder="Кількість" value="#{accrualsBean.itemAccrual.volume}"
+  						placeholder="Кількість" value="#{accrualsBean.itemVacation.volume}"
   						required="true" requiredMessage="поле обов'язкове">
   					<f:ajax event="keyup" render="text4message"/>
 				</h:inputText>
@@ -58,7 +58,7 @@
 			<div class="input-group">
   				<span class="input-group-addon" style="width: 150px; text-align: left;">Коментар</span>
   				<h:inputText id="inputNote" type="text" class="form-control" style="width: 300px;" 
-  						placeholder="Коментар" value="#{accrualsBean.itemAccrual.note}"
+  						placeholder="Коментар" value="#{accrualsBean.itemVacation.note}"
   						required="true" requiredMessage="поле обов'язкове" readonly="#{(accrualsBean.actionId == 2)}">
   					<f:ajax event="keyup" render="text3message"/>
 				</h:inputText>
@@ -66,7 +66,7 @@
 			</div>	
 			<br></br>									    		
     		
-    		<h:commandLink class="btn btn-success" style="width: 160px;" action="#{accrualsBean.saveAccrual}">
+    		<h:commandLink class="btn btn-success" style="width: 160px;" action="#{accrualsBean.saveVacation}">
     			<span class="glyphicon glyphicon-floppy-disk"/>
     			Зберегти
     		</h:commandLink> 
