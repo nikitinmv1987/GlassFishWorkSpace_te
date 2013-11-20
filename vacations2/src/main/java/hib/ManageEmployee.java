@@ -81,5 +81,11 @@ public class ManageEmployee {
 	    
 		return vacationID;
 	}
+	
+	public void delVacation(Vacation vacation) {
+		Transaction tx = session.beginTransaction();		
+		session.delete(vacation);
+	    tx.commit();	   
+	}
         
 }

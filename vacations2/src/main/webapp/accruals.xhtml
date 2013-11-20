@@ -18,11 +18,11 @@
          
          <h:form id="form">
             <h4>
-       		<h:selectOneMenu styleClass="bootstrap-select" value="#{employeesBean.itemEmployee.idEmploees}">
+       		<h:selectOneMenu styleClass="bootstrap-select" value="#{employeesBean.selectedItem}">
        			<f:selectItems value="#{employeesBean.employeesList}" var="empl" 
        				itemLabel="#{empl.name}" itemValue="#{empl.idEmploees}">       				      				
        			</f:selectItems>
-       			<f:ajax listener="#{employeesBean.setItemEmployeeDropDown}" render="dataTable"/> 
+       			<f:ajax event="change" listener="#{employeesBean.setItemEmployeeDropDown}" render="form"/> 
        		</h:selectOneMenu>
        		</h4>         	
          	
