@@ -10,9 +10,11 @@ import javax.inject.Named;
 import javax.sql.DataSource;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.util.List;
 
 import model.Employee;
+import model.Vacation;
 
 @Named
 @SessionScoped
@@ -69,9 +71,7 @@ public class EmployeesBean implements Serializable{
 			selectedItem = itemEmployee.getIdEmploees();
 	        System.out.println(rowIndex);
 	        System.out.println(itemEmployee.getName());
-	    } else {
-	    	System.out.println("--lala-");
-	    }
+	    } 
 	}
 	
 	public void setItemEmployeeDropDown() {		    	        
@@ -146,6 +146,34 @@ public class EmployeesBean implements Serializable{
 		
         return "employees"; 
     }
+	
+	public BigDecimal getPosSum() {
+		BigDecimal result = BigDecimal.ZERO;
+		for (Vacation vac: itemEmployee.getVacations()) {
+			if (vac.getVolume().compareTo(BigDecimal.ZERO) > 0) {
+				result = result.add(vac.getVolume());
+			}			
+		}
+		return result;
+	}
+	
+	public BigDecimal getNegSum() {
+		BigDecimal result = BigDecimal.ZERO;
+		for (Vacation vac: itemEmployee.getVacations()) {
+			if (vac.getVolume().compareTo(BigDecimal.ZERO) < 0) {
+				result = result.add(vac.getVolume());
+			}			
+		}
+		return result;
+	}
+	
+	public BigDecimal getSum() {
+		BigDecimal result = BigDecimal.ZERO;
+		for (Vacation vac: itemEmployee.getVacations()) {
+			result = result.add(vac.getVolume());	
+		}
+		return result;
+	}
 	
 	public Employee getItemEmployee() {
 		return itemEmployee;

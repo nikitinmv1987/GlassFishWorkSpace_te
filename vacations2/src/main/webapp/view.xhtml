@@ -24,21 +24,21 @@
        	 	<table>
        	 		<tr>
        	 			<td><h4>Всього нараховано:</h4></td>
-       				<td><h4><span class="label label-success">#{vacationsBean.sumPos}</span></h4></td>       					
+       				<td><h4><span class="label label-success">#{employeesBean.posSum}</span></h4></td>       					
        			</tr>
        			<tr>
        				<td><h4>Всього використано:</h4></td>
-       				<td><h4><span class="label label-warning">#{vacationsBean.sumNeg}</span></h4></td>
+       				<td><h4><span class="label label-warning">#{employeesBean.negSum}</span></h4></td>
        			</tr>
        			<tr>
        				<td><h4>Баланс:</h4></td>
-       				<td><h4><span class="label label-primary">#{vacationsBean.sum}</span></h4></td>
+       				<td><h4><span class="label label-primary">#{employeesBean.sum}</span></h4></td>
        			</tr>       			 	
       		</table>
        	</div>                  	         	                		        		
       		
       		<h:dataTable class="table table-bordered table-hover" 
-      			value="#{vacationsBean.accrualsList}" var="accrual">      			         			          	
+      			value="#{vacationsBean.vacationList}" var="accrual">      			         			          	
           		           		
          		<h:column>
          		 	<f:facet name="header">Дата</f:facet>

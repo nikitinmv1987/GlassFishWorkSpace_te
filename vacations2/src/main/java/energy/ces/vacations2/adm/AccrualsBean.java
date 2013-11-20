@@ -31,7 +31,7 @@ public class AccrualsBean implements Serializable{
 	private int rowIndex;
 	
 	public List<Vacation> getVacationsList() {		
-		return employeesBean.getItemEmployee().getVacations();								 
+		return employeesBean.getItemEmployee().getVacations();
 	}
 
 	public Vacation getItemVacation() {
@@ -58,7 +58,9 @@ public class AccrualsBean implements Serializable{
 	}
 	
 	public String saveVacation() {				
-		employeesBean.getItemEmployee().addVacation(itemVacation);			
+		if (actionId != 1) {
+			employeesBean.getItemEmployee().addVacation(itemVacation);
+		}
 		int returnId = employeesBean.getME().addVacation(itemVacation);									
 
 		for (Vacation vac : getVacationsList()) {
@@ -89,39 +91,14 @@ public class AccrualsBean implements Serializable{
 		return "editAccrual?faces-redirec=true";
 	}
 	
-	public String removeVacation() {	
-		/*String rowIndex = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().get("rowIndex");	
-		
-		if (rowIndex != null && rowIndex.trim().length() != 0 && (Integer.parseInt(rowIndex) != 0)) {
-			setRowIndex(Integer.parseInt(rowIndex)); 
-			itemVacation = getVacationsList().get(this.rowIndex - 1);			
-	        
-	        Connection conn = ds.getConnection();
-	        try {
-				PreparedStatement deleteEmployee = conn.prepareStatement(
-						"DELETE FROM Vacations " +
-						"WHERE IdRecord = ?");
-				
-				deleteEmployee.setInt(1, itemVacation.getIdRecord());							
-				deleteEmployee.execute();				
-			}
-			finally {
-				conn.close();
-			}		
-	        
-	    } else {
-	    	System.out.println("�� ������� ������");
-	    }
-		*/
-		
+	public String removeVacation() {		
 		if (rowIndex != 0) {
 			employeesBean.getItemEmployee().removeVacation(itemVacation);
 			employeesBean.getME().delVacation(itemVacation);
 			setRowIndex(0);
 		}
-		
-		
-		return "vacation";
+				
+		return "accruals";
 	}
 	
 	public EmployeesBean getEmployeesBean() {

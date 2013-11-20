@@ -1,10 +1,6 @@
 package model;
 
 import java.io.Serializable;
-import java.math.BigDecimal;
-
-import org.hibernate.annotations.Formula;
-
 import java.util.List;
 
 import javax.persistence.*;
@@ -50,15 +46,6 @@ public class Employee implements Serializable {
 	@OrderBy("date desc")
 	private List<Vacation> vacations;
 
-	@Formula("(select ISNULL(SUM(v.Volume), 0) from Vacations v where v.IdEmloyee = IdEmploees)")	
-	private BigDecimal balance;
-	
-	@Formula("(select ISNULL(SUM(CASE WHEN v.Volume > 0 THEN ABS(v.Volume) ELSE 0 END), 0) from Vacations v where v.IdEmloyee = IdEmploees)")	
-	private BigDecimal posBalance;
-	
-	@Formula("(select ISNULL(SUM(CASE WHEN v.Volume < 0 THEN ABS(v.Volume) ELSE 0 END), 0) from Vacations v where v.IdEmloyee = IdEmploees)")	
-	private BigDecimal negBalance;
-	
 	public Employee() {
 	}
 
@@ -139,29 +126,4 @@ public class Employee implements Serializable {
 
 		return vacation;
 	}
-
-	public BigDecimal getBalance() {
-		return balance;
-	}
-
-	public void setBalance(BigDecimal balance) {
-		this.balance = balance;
-	}
-
-	public BigDecimal getPosBalance() {
-		return posBalance;
-	}
-
-	public void setPosBalance(BigDecimal posBalance) {
-		this.posBalance = posBalance;
-	}
-
-	public BigDecimal getNegBalance() {
-		return negBalance;
-	}
-
-	public void setNegBalance(BigDecimal negBalance) {
-		this.negBalance = negBalance;
-	}
-
 }

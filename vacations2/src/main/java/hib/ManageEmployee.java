@@ -61,19 +61,6 @@ public class ManageEmployee {
         return (Employee) session.get(Employee.class, s);
     }
     
-/*	@SuppressWarnings("unchecked")
-	public List<Vacation> getVacList(int idEmployee) {				
-		Query query = session.createQuery( "from Vacation where idEmloyee = :id order by date desc" );
-		query.setParameter("id", idEmployee);
-		query.setFirstResult(0);
-		query.setMaxResults(20);
-		@SuppressWarnings("rawtypes")
-		List result = query.list();
-		
-		return result;
-	}
-*/
-	
 	public int addVacation(Vacation vacation) {
 		Transaction tx = session.beginTransaction();		
 		int vacationID = (Integer) session.save(vacation);
