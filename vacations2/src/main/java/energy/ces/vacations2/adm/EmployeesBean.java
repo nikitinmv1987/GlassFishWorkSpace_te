@@ -5,10 +5,16 @@ import hib.ManageEmployee;
 import javax.annotation.Resource;
 import javax.enterprise.context.SessionScoped;
 import javax.faces.component.html.HtmlDataTable;
+import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.inject.Named;
+import javax.servlet.http.HttpServletRequest;
 import javax.sql.DataSource;
 
+import com.sun.jna.platform.win32.Secur32;
+import com.sun.jna.platform.win32.Secur32Util;
+
+import java.io.IOException;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.List;
@@ -44,8 +50,7 @@ public class EmployeesBean implements Serializable{
 		ME = mE;
 	}
 
-	public void setItemEmployeeByLogin(String login) {
-		
+	public void setItemEmployeeByLogin(String login) throws IOException {		
 		for (Employee empl : getEmployeesList()) {
 			if (empl.getLogin().equalsIgnoreCase(login)) {
 				itemEmployee = empl;
@@ -55,8 +60,8 @@ public class EmployeesBean implements Serializable{
 		} 
 	}
 	
-	public List<Employee> getEmployeesList() { 	
-		
+	public List<Employee> getEmployeesList() throws IOException { 
+		getAcces();
 		if (employeesList == null) { 
 			updateEmplList();
 		}
@@ -129,7 +134,6 @@ public class EmployeesBean implements Serializable{
 	}
 	
 	public String saveEmployee() {		
-		
 		if (!(itemEmployee.getIdEmploees() > 0))	{		
 			int returnId = ME.addEmployee(itemEmployee);										
 			updateEmplList();
@@ -172,6 +176,43 @@ public class EmployeesBean implements Serializable{
 		for (Vacation vac: itemEmployee.getVacations()) {
 			result = result.add(vac.getVolume());	
 		}
+		return result;
+	}
+	
+	public void getAcces() throws IOException {
+		FacesContext facesContext = FacesContext.getCurrentInstance();
+		ExternalContext externalContext = facesContext.getExternalContext();
+		HttpServletRequest origRequest = (HttpServletRequest) externalContext.getRequest();
+		
+		System.out.println(origRequest.getRequestURI());
+				
+		
+		switch (origRequest.getRequestURI()) {
+		case "/vacations2/accruals.xhtml":
+				if (!itemEmployee.getAdmin()) {
+					externalContext.redirect("accessDenied.xhtml");
+				}
+			break;
+			
+		case "/vacations2/vacations.xhtml":			
+			if (!itemEmployee.getAdmin()) {
+				externalContext.redirect("accessDenied.xhtml");
+			}
+		break;
+			
+		case "/vacations2/employees.xhtml":			
+			if (!itemEmployee.getAdmin()) {
+				externalContext.redirect("accessDenied.xhtml");
+			}
+			break;
+			
+		default:
+			break;
+		}		
+	}
+	
+	public String getUser() {
+		String result = Secur32Util.getUserNameEx(Secur32.EXTENDED_NAME_FORMAT.NameSamCompatible);
 		return result;
 	}
 	

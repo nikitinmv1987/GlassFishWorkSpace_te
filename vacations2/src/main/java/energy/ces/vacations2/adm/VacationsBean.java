@@ -12,9 +12,6 @@ import javax.inject.Inject;
 import javax.inject.Named;
 import javax.sql.DataSource;
 
-import com.sun.jna.platform.win32.Secur32;
-import com.sun.jna.platform.win32.Secur32Util;
-
 import model.Vacation;
 
 @Named
@@ -29,7 +26,7 @@ public class VacationsBean implements Serializable{
 	private EmployeesBean employeesBean;
 	
 	public String getItemEmployeeByLogin() throws IOException {					
-		employeesBean.setItemEmployeeByLogin(Secur32Util.getUserNameEx(Secur32.EXTENDED_NAME_FORMAT.NameSamCompatible));
+		employeesBean.setItemEmployeeByLogin(employeesBean.getUser());
 		
 		FacesContext facesContext = FacesContext.getCurrentInstance();
 		ExternalContext externalContext = facesContext.getExternalContext();
