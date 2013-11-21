@@ -14,13 +14,12 @@
 		<load-on-startup>1</load-on-startup>
 	</servlet>
 	<servlet-mapping>
-		<servlet-name>Faces Servlet</servlet-name>
-		<url-pattern>/faces/*</url-pattern>
+	    <servlet-name>Faces Servlet</servlet-name>
+	    <url-pattern>*.xhtml</url-pattern>
 	</servlet-mapping>
 	<welcome-file-list>
-		<welcome-file>employees.xhtml</welcome-file>
+	    <welcome-file>view.xhtml</welcome-file>
 	</welcome-file-list>
-
 	<filter>
 		<filter-name>SecurityFilter</filter-name>
 		<filter-class>waffle.servlet.NegotiateSecurityFilter</filter-class>
