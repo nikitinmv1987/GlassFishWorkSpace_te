@@ -1,13 +1,19 @@
 package energy.ces.vacations2.adm;
 
+import java.io.IOException;
 import java.io.Serializable;
 import java.util.List;
 
 import javax.annotation.Resource;
 import javax.enterprise.context.SessionScoped;
+import javax.faces.context.ExternalContext;
+import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
 import javax.sql.DataSource;
+
+import com.sun.jna.platform.win32.Secur32;
+import com.sun.jna.platform.win32.Secur32Util;
 
 import model.Vacation;
 
@@ -22,8 +28,21 @@ public class VacationsBean implements Serializable{
 	@Inject
 	private EmployeesBean employeesBean;
 	
-	public String getItemEmployeeByLogin() {			
-		employeesBean.setItemEmployeeByLogin("nikitinmaksi");
+	public String getItemEmployeeByLogin() throws IOException {					
+		employeesBean.setItemEmployeeByLogin(Secur32Util.getUserNameEx(Secur32.EXTENDED_NAME_FORMAT.NameSamCompatible));
+		
+		FacesContext facesContext = FacesContext.getCurrentInstance();
+		ExternalContext externalContext = facesContext.getExternalContext();
+		
+		if (employeesBean.getItemEmployee().getLogin() == null) {
+			
+			externalContext.redirect("accessDenied.xhtml");
+		}
+		else {
+			if (employeesBean.getItemEmployee().getAdmin()) {
+				externalContext.redirect("vacations.xhtml");
+			}
+		}
 		
 		return employeesBean.getItemEmployee().getName();
 	}
