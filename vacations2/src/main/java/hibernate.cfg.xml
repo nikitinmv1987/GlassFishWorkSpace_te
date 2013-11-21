@@ -3,12 +3,9 @@
                                          "http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
 <hibernate-configuration>
  <session-factory>
-  <property name="hibernate.connection.driver_class">com.microsoft.sqlserver.jdbc.SQLServerDriver</property>
-  <property name="hibernate.connection.password">masterkey</property>
-  <property name="hibernate.connection.url">jdbc:sqlserver://localhost:1433;databaseName=Vacations</property>
-  <property name="hibernate.connection.username">sa</property>
-  <property name="hibernate.default_schema">dbo</property>
-  
+  <property name="hibernate.dialect">org.hibernate.dialect.SQLServerDialect</property>
+  <property name="hibernate.connection.datasource">vacRes</property>
+      
   <mapping class="model.Employee" />
   <mapping class="model.Vacation" />
  </session-factory>

@@ -33,6 +33,7 @@ public class EmployeesBean implements Serializable{
 	private Employee itemEmployee = new Employee();
 	private String actionDesc;
 	private int selectedItem;
+	private Employee currentEmpl;
 	
 	private int rowIndex;
 	
@@ -56,6 +57,7 @@ public class EmployeesBean implements Serializable{
 				itemEmployee = empl;
 				setRowIndex(employeesList.indexOf(empl) + 1);	
 				selectedItem = empl.getIdEmploees();
+				currentEmpl = empl;
 			}
 		} 
 	}
@@ -189,19 +191,19 @@ public class EmployeesBean implements Serializable{
 		
 		switch (origRequest.getRequestURI()) {
 		case "/vacations2/accruals.xhtml":
-				if (!itemEmployee.getAdmin()) {
+				if (!currentEmpl.getAdmin()) {
 					externalContext.redirect("accessDenied.xhtml");
 				}
 			break;
 			
 		case "/vacations2/vacations.xhtml":			
-			if (!itemEmployee.getAdmin()) {
+			if (!currentEmpl.getAdmin()) {
 				externalContext.redirect("accessDenied.xhtml");
 			}
 		break;
 			
 		case "/vacations2/employees.xhtml":			
-			if (!itemEmployee.getAdmin()) {
+			if (!currentEmpl.getAdmin()) {
 				externalContext.redirect("accessDenied.xhtml");
 			}
 			break;
