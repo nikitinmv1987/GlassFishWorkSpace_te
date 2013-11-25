@@ -8,12 +8,26 @@
 <head>
 	<title>IGNORED</title>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<h:outputScript name="main.js" library="js" target="head"/>      
 </head>
 <body>
 	<ui:composition>
-    	<div class="header">
-     		Система управління відгулами
-        </div>
+   	 <div class="container">
+      <div class="masthead">
+        <h3 class="text-muted">Система упраління відгулами</h3>
+        <ul class="nav nav-justified" id= "headList">
+          <li>
+          	<a href="employees.xhtml">Співробітники</a>
+          </li>
+          <li>
+          	<a href="vacations.xhtml">Відгули</a>
+          </li>
+          <li>
+          	<a href="accruals.xhtml">Нарахування</a>
+          </li>
+        </ul>
+      </div>
+      </div>
     </ui:composition>
 </body>
 </html>

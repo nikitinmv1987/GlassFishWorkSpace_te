@@ -17,19 +17,13 @@
       <h:outputScript name="main.js" library="js" target="head"/>      
    </h:head>
   
-   <h:body>   
-      <div id="heading">
+   <h:body>      
+      <div>
          <ui:insert name="heading">
             <ui:include src="/sections/header.xhtml"/>
          </ui:insert>
       </div>     
-      
-      <div id="sidebarLeft">
-         <ui:insert name="sidebarLeft">
-            <ui:include src="/sections/sidebarLeft.xhtml"/>
-         </ui:insert>
-      </div>    
-      
+     
       <div id="content">
          <ui:insert name="content"/>
       </div>

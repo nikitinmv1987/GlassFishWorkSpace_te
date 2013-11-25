@@ -18,7 +18,7 @@
          
          <h:form id="form">
             <h4>
-       		<h:selectOneMenu styleClass="bootstrap-select" value="#{employeesBean.selectedItem}">
+       		<h:selectOneMenu value="#{employeesBean.selectedItem}">
        			<f:selectItems value="#{employeesBean.employeesList}" var="empl" 
        				itemLabel="#{empl.name}" itemValue="#{empl.idEmploees}">       				      				
        			</f:selectItems>
