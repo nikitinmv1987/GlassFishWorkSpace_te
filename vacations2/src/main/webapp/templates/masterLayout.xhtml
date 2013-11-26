@@ -2,10 +2,11 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
-<html xmlns="http://www.w3.org/1999/xhtml"
+<f:view xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:f="http://java.sun.com/jsf/core">
+      xmlns:f="http://java.sun.com/jsf/core"
+      locale="ua">
    
    <h:head>
       <title><ui:insert name="windowTitle"/></title>
@@ -14,7 +15,33 @@
       <h:outputStylesheet name="bootstrap.css" library="bootstrap/css"/>
       <h:outputScript name="jquery.js" library="bootstrap/js" target="head"/>
       <h:outputScript name="bootstrap.js" library="bootstrap/js" target="head"/>
-      <h:outputScript name="main.js" library="js" target="head"/>      
+      <h:outputScript name="main.js" library="js" target="head"/>
+          <script type="text/javascript">
+         	 PrimeFaces.locales ['ua'] = {
+         			closeText: 'Обрати', 
+         			prevText: 'Попередній', 
+         			nextText: 'Наступний', 
+         			monthNames: ['Сiчень', 'Лютий', 'Березень', 'Квiтень', 'Травень', 'Червень', 
+         	         			'Липень', 'Серпень', 'Вересень', 'Жовтень', 'Листопад', 'Грудень' ], 
+         			monthNamesShort: ['Сiч', 'Лют', 'Бер', 'Квi', 'Тра', 
+         			         			'Чер', 'Лип', 'Сер', 'Вер', 'Жов', 'Лис', 'Гру' ], 
+         			dayNames: ['Неділя', 'Понеділок', 'Вівторок', 'Середа', 'Четвер', 'П\'ятниця', 'Субота'], 
+         			dayNamesShort: ['Нд', 'Пн', 'Вт', 'Ср', 'Чт', 'Пт', 'Сб'], 
+         			dayNamesMin: ['Нд', 'Пн', 'Вт', 'Ср', 'Чт', 'Пт', 'Сб'], 
+         			weekHeader: 'Тиждень', 
+         			firstDay: 1, isRTL: false, 
+         			showMonthAfterYear: false, yearSuffix:'', 
+         			timeOnlyTitle: 'Тільки Час', 
+         			timeText: 'Час', 
+         			hourText: 'Час', 
+         			minuteText: 'Хвилина', 
+         			secondText: 'Секунда', 
+         			currentText: 'Поточна дата',
+         		    ampm: false, month: 'Місяць', 
+         		    week: 'тиждень', day: 'день', 
+         		    allDayText: 'Весь День'
+          	};
+</script>      
    </h:head>
   
    <h:body>      
@@ -29,4 +56,4 @@
       </div>
       <ui:debug/>
    </h:body>
-</html>
+</f:view>

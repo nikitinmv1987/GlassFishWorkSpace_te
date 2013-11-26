@@ -4,7 +4,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
 	  xmlns:f="http://java.sun.com/jsf/core"
       xmlns:ui="http://java.sun.com/jsf/facelets"
-      xmlns:h="http://java.sun.com/jsf/html">
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
    <head>
      <title>IGNORED</title>
      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />   	 
@@ -19,12 +20,12 @@
         <h:form id = "vacForm"> 
        	<div>       	
        		<h4>
-       		<h:selectOneMenu styleClass="bootstrap-select" value="#{employeesBean.selectedItem}">
+       		<p:selectOneMenu styleClass="bootstrap-select" value="#{employeesBean.selectedItem}" effect="fade" style="width:250px">
        			<f:selectItems value="#{employeesBean.employeesList}" var="empl" 
        				itemLabel="#{empl.name}" itemValue="#{empl.idEmploees}">       				      				
        			</f:selectItems>
        			<f:ajax event="change" listener="#{employeesBean.setItemEmployeeDropDown}" render="vacForm"/> 
-       		</h:selectOneMenu>
+       		</p:selectOneMenu>
        		</h4>	
        		       		          		          		        	        	 	
        	 	<table>

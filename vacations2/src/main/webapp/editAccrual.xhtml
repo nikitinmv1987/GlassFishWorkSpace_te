@@ -4,7 +4,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
 	  xmlns:f="http://java.sun.com/jsf/core"
       xmlns:ui="http://java.sun.com/jsf/facelets"
-      xmlns:h="http://java.sun.com/jsf/html">
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
    <head>
      <title>IGNORED</title>
      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
@@ -23,13 +24,9 @@
 
 			<div class="input-group">			
   				<span class="input-group-addon" style="width: 150px; text-align: left;">Дата</span>
-  				<h:inputText id="inputDate" type="text" class="form-control" style="width: 300px;" 
-  						placeholder="Дата" value="#{accrualsBean.itemVacation.date}"
-  						required="true"	requiredMessage="поле обов'язкове">
-  					<f:convertDateTime pattern="dd.MM.yyyy" timeZone="Europe/Kiev"/>
-					<f:ajax event="keyup" render="text1message"/>
-				</h:inputText>
-				<h:message id="text1message" for="inputDate" class="label label-danger" style = "margin-left: 3px;"/>
+  				<p:calendar pattern="dd.MM.yyyy" locale="ua" value="#{accrualsBean.itemVacation.date}" style="wifth: 150px" 
+    				navigator="true" required="true" label="Birth Date" 
+    				id="birthDateCal"/>				
 			</div>
 			<br></br>
 			
@@ -46,7 +43,7 @@
 			
 			<div class="input-group">
   				<span class="input-group-addon" style="width: 150px; text-align: left;">Кількість</span>
-  				<h:inputText id="inputVolume" type="text" class="form-control" style="width: 300px;" 
+  				<h:inputText id="inputVolume" type="text" class="form-control" style="width: 185px;" 
   						placeholder="Кількість" value="#{accrualsBean.itemVacation.volume}"
   						required="true" requiredMessage="поле обов'язкове">
   					<f:ajax event="keyup" render="text4message"/>
@@ -79,8 +76,6 @@
        	 </h:form>
           	 
          </ui:define>         
-      </ui:composition>
-      
-    
+      </ui:composition>      
    </body>
 </html>
