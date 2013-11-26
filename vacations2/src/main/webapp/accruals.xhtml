@@ -18,6 +18,7 @@
          <ui:define name="content">                	
 
          <h:form id="form">
+         	<p:hotkey bind="f2" action="#{accrualsBean.editVacation}"/>
             <h4>
        		<p:selectOneMenu value="#{employeesBean.selectedItem}" effect="fade" style="width:250px">
        			<f:selectItems value="#{employeesBean.employeesList}" var="empl" 

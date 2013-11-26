@@ -4,7 +4,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
 	  xmlns:f="http://java.sun.com/jsf/core"
       xmlns:ui="http://java.sun.com/jsf/facelets"
-      xmlns:h="http://java.sun.com/jsf/html">
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
    <head>
      <title>IGNORED</title>
      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
@@ -17,6 +18,7 @@
          <ui:define name="content">
          
          <h:form id="form">	
+            <p:hotkey bind="f2" action="#{employeesBean.editEmployee}"/>
          	<div class="btn-toolbar">
         	<div class="btn-group">         
           		<h:commandLink class="btn btn-default" title="Додати" action="#{employeesBean.addEmployee}">
