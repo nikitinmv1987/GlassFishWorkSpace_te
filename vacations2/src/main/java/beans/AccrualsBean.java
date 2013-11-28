@@ -1,4 +1,4 @@
-package energy.ces.vacations2.adm;
+package beans;
 
 import java.io.Serializable;
 import java.util.List;

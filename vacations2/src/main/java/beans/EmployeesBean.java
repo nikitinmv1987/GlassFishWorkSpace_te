@@ -1,4 +1,4 @@
-package energy.ces.vacations2.adm;
+package beans;
 
 import hib.ManageEmployee;
 
@@ -11,6 +11,7 @@ import javax.inject.Named;
 import javax.servlet.http.HttpServletRequest;
 import javax.sql.DataSource;
 
+import com.sun.jna.platform.*;
 import com.sun.jna.platform.win32.Secur32;
 import com.sun.jna.platform.win32.Secur32Util;
 
