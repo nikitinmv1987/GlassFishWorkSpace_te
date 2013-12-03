@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<PROCESS model-entity="JSFProcess">
+ <PROCESS-ITEM NAME="rules:#index.xhtml" PATH="/index.xhtml"
+  SHAPE="32,17,0,0" model-entity="JSFProcessGroup">
+  <PROCESS-ITEM ID="rules:#index.xhtml:0" NAME="item"
+   PATH="/index.xhtml" model-entity="JSFProcessItem">
+   <PROCESS-ITEM-OUTPUT
+    ID="success:#{paymentBean.createPayment}:#createPayment.xhtml"
+    NAME="output" PATH="/createPayment.xhtml"
+    TARGET="rules:#createPayment.xhtml"
+    TITLE="#{paymentBean.createPayment}:success" model-entity="JSFProcessItemOutput"/>
+  </PROCESS-ITEM>
+ </PROCESS-ITEM>
+ <PROCESS-ITEM NAME="rules:#createPayment.xhtml"
+  PATH="/createPayment.xhtml" SHAPE="240,33,0,0" model-entity="JSFProcessGroup">
+  <PROCESS-ITEM ID="rules:#createPayment.xhtml:0" NAME="item"
+   PATH="/createPayment.xhtml" model-entity="JSFProcessItem">
+   <PROCESS-ITEM-OUTPUT
+    ID="success:#{paymentBean.returnToMain}:#index.xhtml" NAME="output"
+    PATH="/index.xhtml" TARGET="rules:#index.xhtml"
+    TITLE="#{paymentBean.returnToMain}:success" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT ID="success:#{paymentBean.save}:#index.xhtml"
+    NAME="output1" PATH="/index.xhtml" TARGET="rules:#index.xhtml"
+    TITLE="#{paymentBean.save}:success" model-entity="JSFProcessItemOutput"/>
+  </PROCESS-ITEM>
+ </PROCESS-ITEM>
+</PROCESS>

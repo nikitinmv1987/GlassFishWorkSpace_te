@@ -16,7 +16,7 @@ ALTER TABLE Vacations ALTER COLUMN Note nvarchar(50)
 ALTER TABLE Vacations ALTER COLUMN audit_user nvarchar(50)
 GO
 
--- убераем пробелы
+-- убираем пробелы
 UPDATE Employees
 SET Name = RTRIM(Name),
     Position = RTRIM(Position),

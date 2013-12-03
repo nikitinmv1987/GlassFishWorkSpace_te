@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	  xmlns:h="http://java.sun.com/jsf/html"
+	  xmlns:f="http://java.sun.com/jsf/core"
+	  xmlns:ui="http://java.sun.com/jsf/facelets"
+	  xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<h:outputStylesheet library="css" name="block.css" />
+	<h:outputScript library="js" name="shortcut.js" target="head" />
+	<h:outputScript library="js" name="global.js" target="head" />
+	<h:outputScript library="js" name="forIndex.js" target="head"/>
+</h:head>
+<body>
+	<p:layout fullPage="true">
+		<p:layoutUnit position="center">
+
+			<p:megaMenu autoDisplay="false">
+				<p:submenu label="TV" icon="ui-icon-check">
+					<p:column>
+						<p:submenu label="TV.1">
+							<p:menuitem value="TV.1.1" url="#" />
+							<p:menuitem value="TV.1.2" url="#" />
+						</p:submenu>
+						<p:submenu label="TV.2">
+							<p:menuitem value="TV.2.1" url="#" />
+							<p:menuitem value="TV.2.2" url="#" />
+							<p:menuitem value="TV.2.3" url="#" />
+						</p:submenu>
+						<p:submenu label="TV.3">
+							<p:menuitem value="TV.3.1" url="#" />
+							<p:menuitem value="TV.3.2" url="#" />
+						</p:submenu>
+					</p:column>
+
+					<p:column>
+						<p:submenu label="TV.4">
+							<p:menuitem value="TV.4.1" url="#" />
+							<p:menuitem value="TV.4.2" url="#" />
+						</p:submenu>
+						<p:submenu label="TV.5">
+							<p:menuitem value="TV.5.1" url="#" />
+							<p:menuitem value="TV.5.2" url="#" />
+							<p:menuitem value="TV.5.3" url="#" />
+						</p:submenu>
+					</p:column>
+
+					<p:column>
+						<p:graphicImage
+							value="https://www.google.com.ua/images/srpr/logo11w.png"
+							width="200" />
+					</p:column>
+				</p:submenu>
+
+				<p:submenu label="Sports" icon="ui-icon-document">
+
+					<p:column>
+						<p:submenu label="Sports.1">
+							<p:menuitem value="Sports.1.1" url="#" />
+							<p:menuitem value="Sports.1.2" url="#" />
+						</p:submenu>
+						<p:submenu label="Sports.2">
+							<p:menuitem value="Sports.2.1" url="#" />
+							<p:menuitem value="Sports.2.2" url="#" />
+							<p:menuitem value="Sports.2.3" url="#" />
+						</p:submenu>
+						<p:submenu label="Sports.3">
+							<p:menuitem value="Sports.3.1" url="#" />
+							<p:menuitem value="Sports.3.2" url="#" />
+						</p:submenu>
+					</p:column>
+
+					<p:column>
+						<p:submenu label="Sports.4">
+							<p:menuitem value="Sports.4.1" url="#" />
+							<p:menuitem value="Sports.4.2" url="#" />
+						</p:submenu>
+						<p:submenu label="Sports.5">
+							<p:menuitem value="Sports.5.1" url="#" />
+							<p:menuitem value="Sports.5.2" url="#" />
+							<p:menuitem value="Sports.5.3" url="#" />
+						</p:submenu>
+					</p:column>
+					<p:column>
+						<p:submenu label="Sports.7">
+							<p:menuitem value="Sports.7.1" url="#" />
+							<p:menuitem value="Sports.7.2" url="#" />
+						</p:submenu>
+						<p:submenu label="Sports.8">
+							<p:menuitem value="Sports.8.1" url="#" />
+							<p:menuitem value="Sports.8.2" url="#" />
+							<p:menuitem value="Sports.8.3" url="#" />
+							<p:menuitem value="Sports.8.4" url="#" />
+							<p:menuitem value="Sports.8.5" url="#" />
+							<p:menuitem value="Sports.8.6" url="#" />
+						</p:submenu>
+					</p:column>
+				</p:submenu>
+
+				<p:menuitem value="Quit" url="http://www.primefaces.org"
+					icon="ui-icon-close" />
+			</p:megaMenu>
+		<p:panel header="Прием платежей"
+			footer="Номер в скабках соответсвует клавиатурной клавише">
+			<div id="outer">
+				<div id="inner">
+					<h:form id="formNav">						
+						<p:hotkey bind="F1" handler="blockClick(block1)" />
+						<p:hotkey bind="F2" handler="blockClick(block2)" />
+						<p:hotkey bind="F3" handler="blockClick(block3)" />
+						<p:hotkey bind="F4" handler="blockClick(block4)" />
+												
+						<p:commandButton value="Поиск платежей (F1)" styleClass="block" onfocus="nextfocus('block1')"
+							widgetVar="block1" id="block1"/>
+	
+						<p:commandButton value="Формирование платежа (F2)" styleClass="block" onfocus="nextfocus('block2')" 
+							action="#{paymentBean.createPayment}" widgetVar="block2" ajax="false" id="block2"/>
+	
+						<p:commandButton value="Оплата (F3)" styleClass="block" onfocus="nextfocus('block3')"
+							widgetVar="block3" id="block3"/>
+	
+						<p:commandButton value="Отмена оплаты (F4)" styleClass="block" onfocus="nextfocus('block4')"
+							widgetVar="block4" id="block4"/>
+					</h:form>
+				</div>
+			</div>
+		</p:panel>
+		</p:layoutUnit>
+		</p:layout>
+</body>
+</html>
