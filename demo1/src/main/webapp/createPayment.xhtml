@@ -14,110 +14,96 @@
 <body>		
 	<p:layout fullPage="true">
 		<p:layoutUnit position="center">
-
+			
 			<p:megaMenu autoDisplay="false">
-				<p:submenu label="TV" icon="ui-icon-check">
+				<p:submenu label="Зміна" icon="ui-icon-clock">
 					<p:column>
-						<p:submenu label="TV.1">
-							<p:menuitem value="TV.1.1" url="#" />
-							<p:menuitem value="TV.1.2" url="#" />
-						</p:submenu>
-						<p:submenu label="TV.2">
-							<p:menuitem value="TV.2.1" url="#" />
-							<p:menuitem value="TV.2.2" url="#" />
-							<p:menuitem value="TV.2.3" url="#" />
-						</p:submenu>
-						<p:submenu label="TV.3">
-							<p:menuitem value="TV.3.1" url="#" />
-							<p:menuitem value="TV.3.2" url="#" />
-						</p:submenu>
+						<p:submenu label="Касир">
+							<p:menuitem value="Відкрити зміну" url="#" />
+							<p:menuitem value="Закрити змін" url="#" />
+						</p:submenu>					
 					</p:column>
 
 					<p:column>
-						<p:submenu label="TV.4">
-							<p:menuitem value="TV.4.1" url="#" />
-							<p:menuitem value="TV.4.2" url="#" />
-						</p:submenu>
-						<p:submenu label="TV.5">
-							<p:menuitem value="TV.5.1" url="#" />
-							<p:menuitem value="TV.5.2" url="#" />
-							<p:menuitem value="TV.5.3" url="#" />
-						</p:submenu>
-					</p:column>
-
-					<p:column>
-						<p:graphicImage
-							value="https://www.google.com.ua/images/srpr/logo11w.png"
-							width="200" />
-					</p:column>
-				</p:submenu>
-
-				<p:submenu label="Sports" icon="ui-icon-document">
-
-					<p:column>
-						<p:submenu label="Sports.1">
-							<p:menuitem value="Sports.1.1" url="#" />
-							<p:menuitem value="Sports.1.2" url="#" />
-						</p:submenu>
-						<p:submenu label="Sports.2">
-							<p:menuitem value="Sports.2.1" url="#" />
-							<p:menuitem value="Sports.2.2" url="#" />
-							<p:menuitem value="Sports.2.3" url="#" />
-						</p:submenu>
-						<p:submenu label="Sports.3">
-							<p:menuitem value="Sports.3.1" url="#" />
-							<p:menuitem value="Sports.3.2" url="#" />
-						</p:submenu>
-					</p:column>
-
-					<p:column>
-						<p:submenu label="Sports.4">
-							<p:menuitem value="Sports.4.1" url="#" />
-							<p:menuitem value="Sports.4.2" url="#" />
-						</p:submenu>
-						<p:submenu label="Sports.5">
-							<p:menuitem value="Sports.5.1" url="#" />
-							<p:menuitem value="Sports.5.2" url="#" />
-							<p:menuitem value="Sports.5.3" url="#" />
-						</p:submenu>
-					</p:column>
-					<p:column>
-						<p:submenu label="Sports.7">
-							<p:menuitem value="Sports.7.1" url="#" />
-							<p:menuitem value="Sports.7.2" url="#" />
-						</p:submenu>
-						<p:submenu label="Sports.8">
-							<p:menuitem value="Sports.8.1" url="#" />
-							<p:menuitem value="Sports.8.2" url="#" />
-							<p:menuitem value="Sports.8.3" url="#" />
-							<p:menuitem value="Sports.8.4" url="#" />
-							<p:menuitem value="Sports.8.5" url="#" />
-							<p:menuitem value="Sports.8.6" url="#" />
+						<p:submenu label="Старший касир">
+							<p:menuitem value="Перегляд даних зміни касира" url="#" />
+							<p:menuitem value="Підтвердження даних зміни Касира" url="#" />
 						</p:submenu>
 					</p:column>
 				</p:submenu>
 
-				<p:menuitem value="Quit" url="http://www.primefaces.org"
-					icon="ui-icon-close" />
+				<p:submenu label="Прийом платежів" icon="ui-icon-mail-open">
+
+					<p:column>
+						<p:submenu label="Нова сесія оплати">
+							<p:menuitem value="Пошук банківського продукту" url="#" />
+							<p:menuitem value="Новий платіж" url="#" />
+							<p:menuitem value="Перегляд платежів" url="#" />
+							<p:menuitem value="Відміна платежу" url="#" />
+							<p:menuitem value="Розрахунок з клієнтом" url="#" />
+						</p:submenu>						
+						<p:submenu>
+							<p:menuitem value="Сторнування платежу" url="#" />
+							<p:menuitem value="Перегляд прийнятих платежів" url="#" />
+						</p:submenu>						
+					</p:column>
+				</p:submenu>
+				
+				<p:submenu label="Документи Касира" icon="ui-icon-document">
+					<p:column>
+						<p:submenu label="Касир">
+							<p:menuitem value="Підкріплення каси" url="#" />
+							<p:menuitem value="Повернення підкріплення" url="#" />
+							<p:menuitem value="Інкасація каси" url="#" />
+							<p:menuitem value="Запит на роботу в закритій зміні" url="#" />
+							<p:menuitem value="Перегляд сформованих Щоденника касира" url="#" />
+						</p:submenu>
+					</p:column>
+					<p:column>						
+						<p:submenu label="Старший касир">
+							<p:menuitem value="Підтвердження підкріплення каси" url="#" />
+							<p:menuitem value="Підтвердження повернення підкріплення" url="#" />
+							<p:menuitem value="Підтвердження інкасації каси" url="#" />
+							<p:menuitem value="Підтвердження сторнування платежу" url="#" />
+							<p:menuitem value="Видача дозволу на роботу в закритій зміні" url="#" />
+						</p:submenu>							
+					</p:column>
+				</p:submenu>
+				
+				<p:submenu label="Звітність" icon="ui-icon-document">
+					<p:column>
+						<p:submenu>
+							<p:menuitem value="Моніторинг опер. інформації по роботі кас" url="#" />
+							<p:menuitem value="Перегляд Щоденника касира" url="#" />
+						</p:submenu>
+					</p:column>
+				</p:submenu>
+		
 			</p:megaMenu>
+			
 			<h:form id="form1">
 				<p:focus context="panelGrid" />
 				<p:growl id="growl" showDetail="true" sticky="true" />
 				<div class="pad">
 				<p:panelGrid columns="2" id="panelGrid">
 
-					<f:facet name="header">Формирование платежа</f:facet>
+					<f:facet name="header">Формування платежу</f:facet>
+					
+					<h:outputLabel value="Послуга: *" for="service" />  
+		            <p:autoComplete id="service" required="true" cacheTimeout="30000" 
+		            	widgetVar="service"	onfocus="nextfocus('service')" value="#{paymentBean.txt1}" 
+		            	completeMethod="#{paymentBean.complete}" label="Послуга"/>  
 
 					<h:outputLabel for="number" value="Номер: *" />
 					<p:inputText id="number" required="true" widgetVar="number"
 						value="#{paymentBean.text}" label="Номер" tabindex="1" onfocus="nextfocus('number')"/>
 
-					<h:outputLabel for="sum" value="Сумма: *" />
+					<h:outputLabel for="sum" value="Сума: *" />
 					<p:inputText id="sum" required="true" widgetVar="summ"
-						value="#{paymentBean.text}" label="Сумма" tabindex="2" onfocus="nextfocus('summ')"/>
+						value="#{paymentBean.text}" label="Сума" tabindex="2" onfocus="nextfocus('summ')"/>
 
 					<f:facet name="footer">
-						<p:commandButton value="Сохранить" update="form1" onfocus="nextfocus('blockSave')"
+						<p:commandButton id="blockSave" value="Зберегти" update="form1" onfocus="nextfocus('blockSave')"
 							widgetVar="blockSave" icon="ui-icon-check" tabindex="3" 
 							actionListener="#{paymentBean.save}" />
 					</f:facet>
@@ -125,16 +111,16 @@
 				</div>
 			</h:form>
 		</p:layoutUnit>
-		<p:layoutUnit position="south" header="Навигация" resizable="true"
+		<p:layoutUnit position="south" header="Навігація" resizable="true"
 			size="280" closable="true"
-			footer="Номер в скoбках соответсвует клавиатурной клавише">
+			footer="В дужках гаряча клавіша">
 			<div id="outer">
 				<div id="inner">
 					<h:form id="form2">
-						<p:commandButton value="Вернутся назад" styleClass="block"
+						<p:commandButton value="Певернутися назад" styleClass="block"
 							action="#{paymentBean.returnToMain}" widgetVar="block5" />
 
-						<p:commandButton value="Вернутся в главное меню (Esc)"
+						<p:commandButton value="Головне меню (Esc)"
 							styleClass="block" action="#{paymentBean.returnToMain}"
 							widgetVar="blockReturn" />
 					</h:form>
