@@ -19,8 +19,7 @@ public class PaymentBean implements Serializable {
 	
 	List<String> list = new ArrayList<String>();  
 
-	public PaymentBean() {
-		
+	public PaymentBean() {		
 		list.add("Предоставление");
 		list.add("Предоставление");
 		list.add("Размещение");
@@ -28,8 +27,7 @@ public class PaymentBean implements Serializable {
 		list.add("Возможность размещения");
 		list.add("Использование");
 		list.add("Трансляция");
-		list.add("Приоритетное право");
-			
+		list.add("Приоритетное право");			
 	}
 	
 	public List<String> getList() {
